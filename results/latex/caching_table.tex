@@ -1,0 +1,16 @@
+
+\begin{table}[h]
+\centering
+\caption{Caching Effectiveness Under Different Workload Patterns}
+\label{tab:caching_benchmark}
+\begin{tabular}{lrrrr}
+\toprule
+\textbf{Scenario} & \textbf{Without Cache (ms)} & \textbf{With Cache (ms)} & \textbf{Hit Rate} & \textbf{Speedup} \\
+\midrule
+Low repetition & 7323.4 & 1413.5 & 80.0\% & 5.2x \\
+Medium repetition & 7622.4 & 1261.3 & 82.0\% & 6.0x \\
+High repetition & 7597.6 & 1311.2 & 82.0\% & 5.8x \\
+Very high repetition & 6650.1 & 581.5 & 92.0\% & 11.4x \\
+\bottomrule
+\end{tabular}
+\end{table}

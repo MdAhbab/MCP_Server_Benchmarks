@@ -1,0 +1,229 @@
+{
+  "timestamp": "2026-01-05 17:53:55",
+  "initialization": [
+    {
+      "num_servers": 1,
+      "tools_per_server": 10,
+      "total_tools": 10,
+      "init_time_ms": 14.157800003886223
+    },
+    {
+      "num_servers": 5,
+      "tools_per_server": 10,
+      "total_tools": 50,
+      "init_time_ms": 11.931000015465543
+    },
+    {
+      "num_servers": 10,
+      "tools_per_server": 10,
+      "total_tools": 100,
+      "init_time_ms": 14.345200004754588
+    },
+    {
+      "num_servers": 25,
+      "tools_per_server": 10,
+      "total_tools": 250,
+      "init_time_ms": 25.34590000868775
+    },
+    {
+      "num_servers": 50,
+      "tools_per_server": 10,
+      "total_tools": 500,
+      "init_time_ms": 21.528299985220656
+    },
+    {
+      "num_servers": 100,
+      "tools_per_server": 10,
+      "total_tools": 1000,
+      "init_time_ms": 22.34399999724701
+    }
+  ],
+  "tool_selection": [
+    {
+      "num_servers": 1,
+      "total_tools": 10,
+      "iterations": 100,
+      "mean_latency_ms": 14.700986999378074,
+      "median_latency_ms": 13.91884998884052,
+      "std_latency_ms": 3.9396037721280646,
+      "p95_latency_ms": 25.39330002036877,
+      "p99_latency_ms": 26.154299994232133
+    },
+    {
+      "num_servers": 5,
+      "total_tools": 50,
+      "iterations": 100,
+      "mean_latency_ms": 14.854950999724679,
+      "median_latency_ms": 14.310250000562519,
+      "std_latency_ms": 2.2059680622780853,
+      "p95_latency_ms": 19.01019999058917,
+      "p99_latency_ms": 25.251300015952438
+    },
+    {
+      "num_servers": 10,
+      "total_tools": 100,
+      "iterations": 100,
+      "mean_latency_ms": 14.39008399960585,
+      "median_latency_ms": 13.698199996724725,
+      "std_latency_ms": 2.1915057512742804,
+      "p95_latency_ms": 17.036400007782504,
+      "p99_latency_ms": 22.72939999238588
+    },
+    {
+      "num_servers": 25,
+      "total_tools": 250,
+      "iterations": 100,
+      "mean_latency_ms": 14.425158999802079,
+      "median_latency_ms": 13.796250001178123,
+      "std_latency_ms": 1.7913584101452458,
+      "p95_latency_ms": 17.024200002197176,
+      "p99_latency_ms": 17.989300016779453
+    },
+    {
+      "num_servers": 50,
+      "total_tools": 500,
+      "iterations": 100,
+      "mean_latency_ms": 15.3106189990649,
+      "median_latency_ms": 15.830949996598065,
+      "std_latency_ms": 2.4566421992369274,
+      "p95_latency_ms": 18.027099984465167,
+      "p99_latency_ms": 25.410600006580353
+    },
+    {
+      "num_servers": 100,
+      "total_tools": 1000,
+      "iterations": 100,
+      "mean_latency_ms": 13.128367000026628,
+      "median_latency_ms": 15.768550001666881,
+      "std_latency_ms": 4.3486917399023275,
+      "p95_latency_ms": 16.292299987981096,
+      "p99_latency_ms": 24.870599998394027
+    }
+  ],
+  "context_usage": [
+    {
+      "num_servers": 1,
+      "total_tools": 10,
+      "json_bytes": 6218,
+      "estimated_tokens": 1554,
+      "context_usage_percent": {
+        "gpt-3.5": 9.4879150390625,
+        "gpt-4": 1.214453125,
+        "claude-3": 0.77725,
+        "claude-3.5": 0.77725
+      },
+      "exceeds_gpt35": false,
+      "warning": null
+    },
+    {
+      "num_servers": 5,
+      "total_tools": 50,
+      "json_bytes": 31082,
+      "estimated_tokens": 7770,
+      "context_usage_percent": {
+        "gpt-3.5": 47.4273681640625,
+        "gpt-4": 6.0707031250000005,
+        "claude-3": 3.8852499999999996,
+        "claude-3.5": 3.8852499999999996
+      },
+      "exceeds_gpt35": false,
+      "warning": null
+    },
+    {
+      "num_servers": 10,
+      "total_tools": 100,
+      "json_bytes": 62162,
+      "estimated_tokens": 15540,
+      "context_usage_percent": {
+        "gpt-3.5": 94.8516845703125,
+        "gpt-4": 12.141015625,
+        "claude-3": 7.770249999999999,
+        "claude-3.5": 7.770249999999999
+      },
+      "exceeds_gpt35": false,
+      "warning": null
+    },
+    {
+      "num_servers": 25,
+      "total_tools": 250,
+      "json_bytes": 155852,
+      "estimated_tokens": 38963,
+      "context_usage_percent": {
+        "gpt-3.5": 237.811279296875,
+        "gpt-4": 30.43984375,
+        "claude-3": 19.4815,
+        "claude-3.5": 19.4815
+      },
+      "exceeds_gpt35": true,
+      "warning": null
+    },
+    {
+      "num_servers": 50,
+      "total_tools": 500,
+      "json_bytes": 312002,
+      "estimated_tokens": 78000,
+      "context_usage_percent": {
+        "gpt-3.5": 476.0772705078125,
+        "gpt-4": 60.937890625,
+        "claude-3": 39.000249999999994,
+        "claude-3.5": 39.000249999999994
+      },
+      "exceeds_gpt35": true,
+      "warning": "Context stuffing"
+    },
+    {
+      "num_servers": 100,
+      "total_tools": 1000,
+      "json_bytes": 624302,
+      "estimated_tokens": 156075,
+      "context_usage_percent": {
+        "gpt-3.5": 952.6092529296875,
+        "gpt-4": 121.93398437500001,
+        "claude-3": 78.03774999999999,
+        "claude-3.5": 78.03774999999999
+      },
+      "exceeds_gpt35": true,
+      "warning": "Context stuffing"
+    }
+  ],
+  "concurrent_load": [
+    {
+      "num_servers": 1,
+      "concurrent_requests": 50,
+      "total_time_ms": 13.661600009072572,
+      "throughput_rps": 3659.8934214729866,
+      "mean_latency_ms": 13.24253800092265,
+      "max_latency_ms": 13.431900006253272
+    },
+    {
+      "num_servers": 10,
+      "concurrent_requests": 50,
+      "total_time_ms": 20.527099986793473,
+      "throughput_rps": 2435.8043772461047,
+      "mean_latency_ms": 17.683717997861095,
+      "max_latency_ms": 20.131400000536814
+    },
+    {
+      "num_servers": 50,
+      "concurrent_requests": 50,
+      "total_time_ms": 16.233200003625825,
+      "throughput_rps": 3080.1074334593345,
+      "mean_latency_ms": 15.860712002031505,
+      "max_latency_ms": 15.994799992768094
+    },
+    {
+      "num_servers": 100,
+      "concurrent_requests": 50,
+      "total_time_ms": 16.180100006749853,
+      "throughput_rps": 3090.2157575751385,
+      "mean_latency_ms": 14.197692003217526,
+      "max_latency_ms": 14.825800026301295
+    }
+  ],
+  "analysis": {
+    "initialization_scaling_factor": 0.015782113033885017,
+    "scaling_type": "sub-linear",
+    "context_warning_threshold_servers": 25,
+    "communication_reduction_percent": 47
+  }
+}

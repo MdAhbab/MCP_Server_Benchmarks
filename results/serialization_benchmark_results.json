@@ -1,0 +1,129 @@
+{
+  "timestamp": "2026-01-05 17:52:35",
+  "iterations": 5000,
+  "payloads": {
+    "small": [
+      {
+        "format": "JSON",
+        "size_bytes": 133,
+        "serialize_mean_us": 2.8131000115536153,
+        "serialize_std_us": 0.9915033790432635,
+        "deserialize_mean_us": 2.385940047679469,
+        "deserialize_std_us": 0.685199409826209,
+        "total_mean_us": 5.199040059233084
+      },
+      {
+        "format": "MessagePack",
+        "error": "Not installed (pip install msgpack)"
+      },
+      {
+        "format": "Pickle",
+        "size_bytes": 140,
+        "serialize_mean_us": 1.5318600228056312,
+        "serialize_std_us": 0.5965852949919189,
+        "deserialize_mean_us": 1.2442800216376781,
+        "deserialize_std_us": 0.20474286158989505,
+        "total_mean_us": 2.7761400444433093
+      }
+    ],
+    "medium": [
+      {
+        "format": "JSON",
+        "size_bytes": 1208,
+        "serialize_mean_us": 5.674719897797331,
+        "serialize_std_us": 0.572589559109572,
+        "deserialize_mean_us": 3.6597199097741395,
+        "deserialize_std_us": 0.36485649590580926,
+        "total_mean_us": 9.33443980757147
+      },
+      {
+        "format": "MessagePack",
+        "error": "Not installed (pip install msgpack)"
+      },
+      {
+        "format": "Pickle",
+        "size_bytes": 1206,
+        "serialize_mean_us": 1.8864200275857002,
+        "serialize_std_us": 0.28411576731934735,
+        "deserialize_mean_us": 1.8220199213828892,
+        "deserialize_std_us": 0.5536374193375746,
+        "total_mean_us": 3.7084399489685893
+      }
+    ],
+    "large": [
+      {
+        "format": "JSON",
+        "size_bytes": 62060,
+        "serialize_mean_us": 351.5537999337539,
+        "serialize_std_us": 19.658927246218038,
+        "deserialize_mean_us": 284.87948004039936,
+        "deserialize_std_us": 22.385908738696735,
+        "total_mean_us": 636.4332799741533
+      },
+      {
+        "format": "MessagePack",
+        "error": "Not installed (pip install msgpack)"
+      },
+      {
+        "format": "Pickle",
+        "size_bytes": 45257,
+        "serialize_mean_us": 166.74218002008274,
+        "serialize_std_us": 12.756194901032952,
+        "deserialize_mean_us": 172.7871800365392,
+        "deserialize_std_us": 20.26801008710288,
+        "total_mean_us": 339.52936005662195
+      }
+    ],
+    "binary": [
+      {
+        "format": "JSON",
+        "size_bytes": 34261,
+        "serialize_mean_us": 60.2394800982438,
+        "serialize_std_us": 7.641515277103697,
+        "deserialize_mean_us": 25.247559952549636,
+        "deserialize_std_us": 2.582709296698482,
+        "total_mean_us": 85.48704005079344
+      },
+      {
+        "format": "MessagePack",
+        "error": "Not installed (pip install msgpack)"
+      },
+      {
+        "format": "Pickle",
+        "size_bytes": 34272,
+        "serialize_mean_us": 2.961019944632426,
+        "serialize_std_us": 1.2262085373663707,
+        "deserialize_mean_us": 4.321420000633225,
+        "deserialize_std_us": 0.32110442267662176,
+        "total_mean_us": 7.282439945265651
+      }
+    ]
+  },
+  "base64_overhead": {
+    "1KB": {
+      "original_bytes": 1024,
+      "base64_bytes": 1368,
+      "overhead_percent": 33.59
+    },
+    "10KB": {
+      "original_bytes": 10240,
+      "base64_bytes": 13656,
+      "overhead_percent": 33.36
+    },
+    "100KB": {
+      "original_bytes": 102400,
+      "base64_bytes": 136536,
+      "overhead_percent": 33.34
+    },
+    "1MB": {
+      "original_bytes": 1048576,
+      "base64_bytes": 1398104,
+      "overhead_percent": 33.33
+    }
+  },
+  "energy_estimation": {
+    "cpu_tdp_w": 65,
+    "per_request_wh": 1.1491156443977768e-05,
+    "million_requests_wh": 11.491156443977768
+  }
+}

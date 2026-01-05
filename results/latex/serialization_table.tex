@@ -1,0 +1,20 @@
+
+\begin{table}[h]
+\centering
+\caption{JSON-RPC Serialization Overhead Analysis}
+\label{tab:serialization_benchmark}
+\begin{tabular}{llrrrr}
+\toprule
+\textbf{Payload} & \textbf{Format} & \textbf{Size (B)} & \textbf{Ser. (µs)} & \textbf{Deser. (µs)} & \textbf{Total (µs)} \\
+\midrule
+Small & JSON & 133 & 2.81 & 2.39 & 5.20 \\
+ & Pickle & 140 & 1.53 & 1.24 & 2.78 \\
+Medium & JSON & 1,208 & 5.67 & 3.66 & 9.33 \\
+ & Pickle & 1,206 & 1.89 & 1.82 & 3.71 \\
+Large & JSON & 62,060 & 351.55 & 284.88 & 636.43 \\
+ & Pickle & 45,257 & 166.74 & 172.79 & 339.53 \\
+Binary & JSON & 34,261 & 60.24 & 25.25 & 85.49 \\
+ & Pickle & 34,272 & 2.96 & 4.32 & 7.28 \\
+\bottomrule
+\end{tabular}
+\end{table}

@@ -1,0 +1,72 @@
+{
+  "timestamp": "2026-01-05 17:52:35",
+  "tiktoken_available": false,
+  "scenarios": [
+    {
+      "type": "response_pattern",
+      "dataset_size": 10,
+      "verbose_tokens": 2514,
+      "optimized_tokens": 118,
+      "reduction_percent": 95.31,
+      "verbose_bytes": 10056,
+      "optimized_bytes": 474
+    },
+    {
+      "type": "response_pattern",
+      "dataset_size": 50,
+      "verbose_tokens": 12577,
+      "optimized_tokens": 118,
+      "reduction_percent": 99.06,
+      "verbose_bytes": 50310,
+      "optimized_bytes": 475
+    },
+    {
+      "type": "response_pattern",
+      "dataset_size": 100,
+      "verbose_tokens": 25156,
+      "optimized_tokens": 119,
+      "reduction_percent": 99.53,
+      "verbose_bytes": 100627,
+      "optimized_bytes": 476
+    },
+    {
+      "type": "response_pattern",
+      "dataset_size": 500,
+      "verbose_tokens": 127490,
+      "optimized_tokens": 119,
+      "reduction_percent": 99.91,
+      "verbose_bytes": 509961,
+      "optimized_bytes": 477
+    },
+    {
+      "type": "response_pattern",
+      "dataset_size": 1000,
+      "verbose_tokens": 255407,
+      "optimized_tokens": 119,
+      "reduction_percent": 99.95,
+      "verbose_bytes": 1021628,
+      "optimized_bytes": 478
+    },
+    {
+      "type": "tool_definition",
+      "verbose_tool_count": 5,
+      "optimized_tool_count": 1,
+      "verbose_tokens": 289,
+      "optimized_tokens": 134,
+      "reduction_percent": 53.63
+    }
+  ],
+  "cost_estimation": {
+    "requests": 1000,
+    "dataset_size": 100,
+    "verbose_cost_usd": 75.47,
+    "optimized_cost_usd": 0.36,
+    "savings_usd": 75.11
+  },
+  "energy_estimation": {
+    "per_request_verbose_wh": 2.5156,
+    "per_request_optimized_wh": 0.0119,
+    "million_requests_verbose_kwh": 2515.6,
+    "million_requests_optimized_kwh": 11.9
+  }
+}
