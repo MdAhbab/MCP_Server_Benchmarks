@@ -1,0 +1,82 @@
+{
+  "timestamp": "2026-01-11 19:39:56",
+  "system_info": {
+    "platform": "Windows-11-10.0.26200-SP0",
+    "cpu_name": "Intel(R) Core(TM) i5-10400 CPU @ 2.90GHz",
+    "cpu_cores": 6,
+    "cpu_max_clock_mhz": 2904,
+    "ram_gb": 23.87,
+    "estimated_tdp_w": 65,
+    "psutil_available": true,
+    "note": "Power values are CPU-based estimates; use a hardware meter for publication-quality power measurements."
+  },
+  "workloads": [
+    {
+      "name": "Idle (Baseline)",
+      "duration_seconds": 14.429335594177246,
+      "samples": 25,
+      "avg_cpu_percent": 15.1,
+      "max_cpu_percent": 78.6,
+      "avg_power_watts": 26.3705,
+      "peak_power_watts": 55.263,
+      "min_power_watts": 20.137,
+      "energy_joules": 380.5087942862511,
+      "energy_wh": 0.10569688730173642
+    },
+    {
+      "name": "JSON Processing (MCP typical)",
+      "duration_seconds": 14.976834774017334,
+      "samples": 25,
+      "avg_cpu_percent": 15.0,
+      "max_cpu_percent": 39.5,
+      "avg_power_watts": 26.325,
+      "peak_power_watts": 37.4725,
+      "min_power_watts": 20.0915,
+      "energy_joules": 394.2651754260063,
+      "energy_wh": 0.10951810428500175
+    },
+    {
+      "name": "Heavy Computation (Solver)",
+      "duration_seconds": 14.609647035598755,
+      "samples": 25,
+      "avg_cpu_percent": 13.412,
+      "max_cpu_percent": 35.6,
+      "avg_power_watts": 25.60246,
+      "peak_power_watts": 35.698,
+      "min_power_watts": 21.3655,
+      "energy_joules": 374.04290384303573,
+      "energy_wh": 0.10390080662306549
+    },
+    {
+      "name": "Mixed MCP Workload",
+      "duration_seconds": 14.436981678009033,
+      "samples": 25,
+      "avg_cpu_percent": 6.92,
+      "max_cpu_percent": 32.9,
+      "avg_power_watts": 22.6486,
+      "peak_power_watts": 34.4695,
+      "min_power_watts": 20.0915,
+      "energy_joules": 326.97742323255534,
+      "energy_wh": 0.09082706200904316
+    }
+  ],
+  "production_estimates": {
+    "requests_per_day": 480000,
+    "daily_energy_wh": 35.04579337120056,
+    "monthly_energy_kwh": 1.0513738011360168,
+    "yearly_energy_kwh": 12.791714580488204,
+    "yearly_cost_usd": 1.5350057496585845
+  },
+  "optimization_impact": {
+    "baseline_daily_wh": 35.04579337120056,
+    "optimized_daily_wh": 0.45559531382560725,
+    "savings_percent": 98.7,
+    "annual_savings_kwh": 12.62542229094186
+  },
+  "environmental_impact": {
+    "co2_per_kwh_kg": 0.42,
+    "baseline_annual_co2_kg": 5.372520123805045,
+    "optimized_annual_co2_kg": 0.06984276160946559,
+    "co2_savings_kg": 5.302677362195579
+  }
+}

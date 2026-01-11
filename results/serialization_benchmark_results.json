@@ -1,0 +1,149 @@
+{
+  "timestamp": "2026-01-11 19:38:16",
+  "iterations": 5000,
+  "payloads": {
+    "small": [
+      {
+        "format": "JSON",
+        "size_bytes": 133,
+        "serialize_mean_us": 2.662720001717389,
+        "serialize_std_us": 1.848213566541171,
+        "deserialize_mean_us": 2.312459998574923,
+        "deserialize_std_us": 3.2848891694200066,
+        "total_mean_us": 4.975180000292312
+      },
+      {
+        "format": "MessagePack",
+        "size_bytes": 97,
+        "serialize_mean_us": 3.2262800034914108,
+        "serialize_std_us": 7.814106562301845,
+        "deserialize_mean_us": 1.2380399993162428,
+        "deserialize_std_us": 3.7205087573139677,
+        "total_mean_us": 4.4643200028076535
+      },
+      {
+        "format": "Pickle",
+        "size_bytes": 140,
+        "serialize_mean_us": 1.9781599932684912,
+        "serialize_std_us": 1.015346833743754,
+        "deserialize_mean_us": 1.5938599940454878,
+        "deserialize_std_us": 0.48690832075599716,
+        "total_mean_us": 3.572019987313979
+      }
+    ],
+    "medium": [
+      {
+        "format": "JSON",
+        "size_bytes": 1208,
+        "serialize_mean_us": 5.891160002374818,
+        "serialize_std_us": 1.7483744518257889,
+        "deserialize_mean_us": 3.693239998756326,
+        "deserialize_std_us": 0.534257795465849,
+        "total_mean_us": 9.584400001131144
+      },
+      {
+        "format": "MessagePack",
+        "size_bytes": 1151,
+        "serialize_mean_us": 2.2023799984708603,
+        "serialize_std_us": 0.8954667550924253,
+        "deserialize_mean_us": 1.64972000011403,
+        "deserialize_std_us": 0.30745215125022257,
+        "total_mean_us": 3.8520999985848907
+      },
+      {
+        "format": "Pickle",
+        "size_bytes": 1206,
+        "serialize_mean_us": 1.9462800051769593,
+        "serialize_std_us": 0.31110371357664446,
+        "deserialize_mean_us": 1.804440000159957,
+        "deserialize_std_us": 0.24802537915327638,
+        "total_mean_us": 3.750720005336916
+      }
+    ],
+    "large": [
+      {
+        "format": "JSON",
+        "size_bytes": 62060,
+        "serialize_mean_us": 365.8379000002242,
+        "serialize_std_us": 55.52468535959538,
+        "deserialize_mean_us": 297.2912599993833,
+        "deserialize_std_us": 13.72361763118781,
+        "total_mean_us": 663.1291599996075
+      },
+      {
+        "format": "MessagePack",
+        "size_bytes": 52144,
+        "serialize_mean_us": 181.95386000252256,
+        "serialize_std_us": 18.714016776202666,
+        "deserialize_mean_us": 261.9444400028442,
+        "deserialize_std_us": 15.993202859855101,
+        "total_mean_us": 443.89830000536676
+      },
+      {
+        "format": "Pickle",
+        "size_bytes": 45257,
+        "serialize_mean_us": 168.7022800025261,
+        "serialize_std_us": 10.162678914365436,
+        "deserialize_mean_us": 176.5526999987742,
+        "deserialize_std_us": 14.582015217064825,
+        "total_mean_us": 345.2549800013003
+      }
+    ],
+    "binary": [
+      {
+        "format": "JSON",
+        "size_bytes": 34261,
+        "serialize_mean_us": 61.491800003022945,
+        "serialize_std_us": 4.4757505729229745,
+        "deserialize_mean_us": 25.629020002725156,
+        "deserialize_std_us": 1.574476306631759,
+        "total_mean_us": 87.1208200057481
+      },
+      {
+        "format": "MessagePack",
+        "size_bytes": 34226,
+        "serialize_mean_us": 3.462620000482275,
+        "serialize_std_us": 0.7098545719714823,
+        "deserialize_mean_us": 4.2292999992241675,
+        "deserialize_std_us": 0.3169346906209025,
+        "total_mean_us": 7.691919999706442
+      },
+      {
+        "format": "Pickle",
+        "size_bytes": 34272,
+        "serialize_mean_us": 3.182040000501729,
+        "serialize_std_us": 0.747128551465563,
+        "deserialize_mean_us": 4.530499997144943,
+        "deserialize_std_us": 0.41454326672224445,
+        "total_mean_us": 7.7125399976466715
+      }
+    ]
+  },
+  "base64_overhead": {
+    "1KB": {
+      "original_bytes": 1024,
+      "base64_bytes": 1368,
+      "overhead_percent": 33.59
+    },
+    "10KB": {
+      "original_bytes": 10240,
+      "base64_bytes": 13656,
+      "overhead_percent": 33.36
+    },
+    "100KB": {
+      "original_bytes": 102400,
+      "base64_bytes": 136536,
+      "overhead_percent": 33.34
+    },
+    "1MB": {
+      "original_bytes": 1048576,
+      "base64_bytes": 1398104,
+      "overhead_percent": 33.33
+    }
+  },
+  "energy_estimation": {
+    "cpu_tdp_w": 65,
+    "per_request_wh": 1.1973165388881801e-05,
+    "million_requests_wh": 11.973165388881801
+  }
+}
