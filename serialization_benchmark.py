@@ -225,6 +225,14 @@ def run_benchmark():
     results = {
         "timestamp": time.strftime("%Y-%m-%d %H:%M:%S"),
         "iterations": 5000,
+        "spec_compliance_note": (
+            "The MCP specification mandates JSON-RPC 2.0. MessagePack and "
+            "Pickle results are PROSPECTIVE measurements motivating an "
+            "optional binary transport extension; they do NOT reflect "
+            "spec-compliant MCP behaviour. Pickle is included only as an "
+            "in-process ceiling: it is unsafe for untrusted network input "
+            "(arbitrary code execution on load) and is not proposed for MCP."
+        ),
         "payloads": {},
         "base64_overhead": {}
     }

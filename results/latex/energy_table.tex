@@ -1,16 +1,16 @@
 
 \begin{table}[h]
 \centering
-\caption{Energy Consumption by MCP Workload Type}
+\caption{Estimated Energy by MCP Workload Type (Utilisation Model, Process-Attributed)}
 \label{tab:energy_benchmark}
 \begin{tabular}{lrrrr}
 \toprule
-\textbf{Workload} & \textbf{Avg CPU (\%)} & \textbf{Avg Power (W)} & \textbf{vs Idle} & \textbf{Energy (Wh)} \\
+\textbf{Workload} & \textbf{Proc.\ CPU (\%)} & \textbf{Attr.\ Power (W)} & \textbf{vs Idle} & \textbf{Energy (Wh)} \\
 \midrule
-Idle & 15.1 & 26.4 & baseline & 0.1057 \\
-JSON Processing & 15.0 & 26.3 & baseline & 0.1095 \\
-Heavy Computation & 13.4 & 25.6 & baseline & 0.1039 \\
-Mixed MCP Workload & 6.9 & 22.6 & baseline & 0.0908 \\
+Idle & 0.0 & 0.00 & baseline & 0.0000 \\
+JSON Processing & 8.3 & 3.76 & +3.76~W & 0.0305 \\
+Heavy Computation & 8.3 & 3.78 & +3.78~W & 0.0305 \\
+Mixed MCP Workload & 1.2 & 0.53 & +0.53~W & 0.0043 \\
 \bottomrule
 \end{tabular}
 \end{table}

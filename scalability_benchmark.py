@@ -14,6 +14,26 @@ from pathlib import Path
 from typing import Dict, Any, List
 from dataclasses import dataclass
 
+# Reproducibility and statistical rigour (added after peer review)
+RANDOM_SEED = 42
+INIT_REPETITIONS = 5  # initialization benchmark repeated; mean +/- std reported
+
+# Prefer exact tokenizer counts over the chars/4 heuristic when available
+try:
+    import tiktoken
+    _TIKTOKEN_ENC = tiktoken.get_encoding("cl100k_base")
+    TOKEN_ESTIMATION_METHOD = "tiktoken cl100k_base"
+except Exception:
+    _TIKTOKEN_ENC = None
+    TOKEN_ESTIMATION_METHOD = "chars/4 heuristic (tiktoken unavailable)"
+
+
+def count_tokens(text: str) -> float:
+    """Count tokens with tiktoken when available, else chars/4 heuristic."""
+    if _TIKTOKEN_ENC is not None:
+        return len(_TIKTOKEN_ENC.encode(text))
+    return len(text) / 4
+
 
 @dataclass
 class MockTool:
@@ -187,9 +207,9 @@ def estimate_context_usage(num_servers: int, tools_per_server: int = 10) -> Dict
     
     # Serialize to JSON
     json_str = json.dumps(all_tools, indent=2)
-    
-    # Token estimation (~4 chars per token)
-    estimated_tokens = len(json_str) / 4
+
+    # Token count: tiktoken cl100k_base when available, chars/4 fallback
+    estimated_tokens = count_tokens(json_str)
     
     # Common context window sizes
     context_sizes = {
@@ -251,26 +271,42 @@ async def run_benchmark():
     print("MCP Server Scalability Benchmark")
     print("=" * 70)
     
+    random.seed(RANDOM_SEED)
+
     results = {
         "timestamp": time.strftime("%Y-%m-%d %H:%M:%S"),
+        "random_seed": RANDOM_SEED,
+        "token_estimation_method": TOKEN_ESTIMATION_METHOD,
+        "note": (
+            "Servers are mocked in-process; initialization and tool-call "
+            "latencies are simulated (asyncio.sleep with uniform jitter). "
+            "Token counts of tool definitions are exact payload measurements."
+        ),
         "initialization": [],
         "tool_selection": [],
         "context_usage": [],
         "concurrent_load": []
     }
-    
+
     # Test configurations
     server_counts = [1, 5, 10, 25, 50, 100]
-    
-    # 1. Initialization Benchmark
-    print("\n--- Initialization Time ---\n")
-    print(f"{'Servers':<10} {'Tools':<10} {'Init Time (ms)':<20}")
-    print("-" * 40)
-    
+
+    # 1. Initialization Benchmark (repeated; mean +/- std)
+    print(f"\n--- Initialization Time ({INIT_REPETITIONS} repetitions) ---\n")
+    print(f"{'Servers':<10} {'Tools':<10} {'Init Time (ms)':<20} {'Std (ms)':<10}")
+    print("-" * 50)
+
     for num_servers in server_counts:
-        result = await benchmark_initialization(num_servers)
+        times = []
+        result = None
+        for _ in range(INIT_REPETITIONS):
+            result = await benchmark_initialization(num_servers)
+            times.append(result["init_time_ms"])
+        result["init_time_ms"] = statistics.mean(times)
+        result["init_time_std_ms"] = statistics.stdev(times)
+        result["repetitions"] = INIT_REPETITIONS
         results["initialization"].append(result)
-        print(f"{result['num_servers']:<10} {result['total_tools']:<10} {result['init_time_ms']:<20.2f}")
+        print(f"{result['num_servers']:<10} {result['total_tools']:<10} {result['init_time_ms']:<20.2f} {result['init_time_std_ms']:<10.2f}")
     
     # 2. Tool Selection Benchmark
     print("\n--- Tool Selection Latency ---\n")

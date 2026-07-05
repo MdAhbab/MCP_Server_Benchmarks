@@ -1,6 +1,9 @@
 {
-  "timestamp": "2026-01-11 19:38:03",
+  "timestamp": "2026-07-05 18:44:49",
   "tiktoken_available": true,
+  "tokenizer": "cl100k_base",
+  "reduction_formula": "reduction = (verbose_tokens - optimized_tokens) / verbose_tokens * 100, rounded to 2 decimals",
+  "note": "Deterministic payload-level measurement: token counts of synthetic JSON-RPC responses. No LLM/controller in the loop, so repeated runs are bit-identical (variance is zero by construction).",
   "scenarios": [
     {
       "type": "response_pattern",

@@ -181,14 +181,16 @@ def plot_caching_effectiveness(results: Dict, output_dir: Path):
     
     fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(12, 5))
     
-    # Speedup by scenario
+    # Speedup by scenario (error bars = std across repetitions, if present)
     names = [s["scenario"].split("(")[0].strip() for s in scenarios]
     speedups = [s["speedup"] for s in scenarios]
+    speedup_stds = [s.get("speedup_std", 0) for s in scenarios]
     hit_rates = [s["cache_stats"]["hit_rate"] for s in scenarios]
-    
+
     colors = plt.cm.RdYlGn(np.linspace(0.2, 0.8, len(names)))
-    
-    bars = ax1.bar(names, speedups, color=colors)
+
+    bars = ax1.bar(names, speedups, color=colors,
+                   yerr=speedup_stds, capsize=4, ecolor='gray')
     ax1.axhline(y=100, color='r', linestyle='--', alpha=0.5, label='Literature claim (100x)')
     ax1.set_xlabel('Workload Pattern', fontsize=11)
     ax1.set_ylabel('Speedup Factor (x)', fontsize=11)
@@ -332,23 +334,31 @@ def plot_energy_consumption(results: Dict, output_dir: Path):
     
     fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(12, 5))
     
-    # Power consumption by workload
+    # Power by workload: prefer process-attributed estimates (v2 results)
+    use_attr = all("avg_attributed_power_watts" in w for w in workloads)
+    power_key = "avg_attributed_power_watts" if use_attr else "avg_power_watts"
+    std_key = "std_attributed_power_watts" if use_attr else "std_power_watts"
+
     names = [w["name"].split("(")[0].strip() for w in workloads]
-    powers = [w["avg_power_watts"] for w in workloads]
-    
+    powers = [w[power_key] for w in workloads]
+    errors = [w.get(std_key, 0) for w in workloads]
+
     colors = ['#27ae60', '#f39c12', '#e74c3c', '#3498db']
-    bars = ax1.bar(names, powers, color=colors[:len(names)])
-    
+    bars = ax1.bar(names, powers, color=colors[:len(names)],
+                   yerr=errors, capsize=4, ecolor='gray')
+
     ax1.set_xlabel('Workload Type', fontsize=11)
-    ax1.set_ylabel('Average Power (W)', fontsize=11)
-    ax1.set_title('Power Consumption by MCP Workload', fontsize=12, fontweight='bold')
+    ax1.set_ylabel('Attributed Power Estimate (W)' if use_attr else 'Average Power (W)', fontsize=11)
+    ax1.set_title('Estimated Power by MCP Workload\n(utilisation model, process-attributed)' if use_attr
+                  else 'Power Consumption by MCP Workload', fontsize=12, fontweight='bold')
     ax1.tick_params(axis='x', rotation=15)
     ax1.grid(True, alpha=0.3, axis='y')
-    
+
     # Add value labels
+    label_offset = max(powers) * 0.02 if max(powers) > 0 else 0.5
     for bar, power in zip(bars, powers):
-        ax1.text(bar.get_x() + bar.get_width()/2, bar.get_height() + 0.5,
-                f'{power:.1f}W', ha='center', va='bottom', fontsize=10)
+        ax1.text(bar.get_x() + bar.get_width()/2, bar.get_height() + label_offset,
+                f'{power:.2f}W', ha='center', va='bottom', fontsize=10)
     
     # Energy savings potential
     opt = data.get("optimization_impact", {})
@@ -357,9 +367,9 @@ def plot_energy_consumption(results: Dict, output_dir: Path):
         values = [opt.get("baseline_daily_wh", 0), opt.get("optimized_daily_wh", 0)]
         
         bars = ax2.bar(categories, values, color=['#e74c3c', '#27ae60'])
-        
+
         ax2.set_ylabel('Daily Energy (Wh)', fontsize=11)
-        ax2.set_title('Energy Savings Potential (Production Load)', fontsize=12, fontweight='bold')
+        ax2.set_title('Estimated Energy Savings\n(model-based scenario, production load)', fontsize=12, fontweight='bold')
         ax2.grid(True, alpha=0.3, axis='y')
         
         # Add savings annotation
@@ -457,7 +467,7 @@ def plot_summary_dashboard(results: Dict, output_dir: Path):
         scenarios = [s for s in results["token"].get("scenarios", []) if s["type"] == "response_pattern"]
         if scenarios:
             best = max(scenarios, key=lambda x: x["reduction_percent"])
-            findings.append(f"• Token Reduction: {best['reduction_percent']:.1f}%")
+            findings.append(f"• Token Reduction: {best['reduction_percent']:.2f}%")
     
     if "caching" in results:
         scenarios = results["caching"].get("scenarios", [])

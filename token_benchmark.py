@@ -206,6 +206,13 @@ def run_benchmark():
     results = {
         "timestamp": time.strftime("%Y-%m-%d %H:%M:%S"),
         "tiktoken_available": TIKTOKEN_AVAILABLE,
+        "tokenizer": "cl100k_base" if TIKTOKEN_AVAILABLE else "chars/4 heuristic",
+        "reduction_formula": "reduction = (verbose_tokens - optimized_tokens) / verbose_tokens * 100, rounded to 2 decimals",
+        "note": (
+            "Deterministic payload-level measurement: token counts of "
+            "synthetic JSON-RPC responses. No LLM/controller in the loop, so "
+            "repeated runs are bit-identical (variance is zero by construction)."
+        ),
         "scenarios": []
     }
     
@@ -229,10 +236,11 @@ def run_benchmark():
         optimized_text = json.dumps(optimized)
         optimized_tokens = count_tokens(optimized_text)
         
-        # Calculate reduction
+        # Calculate reduction; report 2 decimals so values like 99.95% are
+        # never displayed as a (mathematically impossible) 100.0%
         reduction = ((verbose_tokens - optimized_tokens) / verbose_tokens) * 100
-        
-        print(f"{size:<10} {verbose_tokens:<15} {optimized_tokens:<15} {reduction:.1f}%")
+
+        print(f"{size:<10} {verbose_tokens:<15} {optimized_tokens:<15} {reduction:.2f}%")
         
         results["scenarios"].append({
             "type": "response_pattern",

@@ -5,20 +5,20 @@
 \label{tab:serialization_benchmark}
 \begin{tabular}{llrrrr}
 \toprule
-\textbf{Payload} & \textbf{Format} & \textbf{Size (B)} & \textbf{Ser. (µs)} & \textbf{Deser. (µs)} & \textbf{Total (µs)} \\
+\textbf{Payload} & \textbf{Format} & \textbf{Size (B)} & \textbf{Ser. (Âµs)} & \textbf{Deser. (Âµs)} & \textbf{Total (Âµs)} \\
 \midrule
-Small & JSON & 133 & 2.66 & 2.31 & 4.98 \\
- & MessagePack & 97 & 3.23 & 1.24 & 4.46 \\
- & Pickle & 140 & 1.98 & 1.59 & 3.57 \\
-Medium & JSON & 1,208 & 5.89 & 3.69 & 9.58 \\
- & MessagePack & 1,151 & 2.20 & 1.65 & 3.85 \\
- & Pickle & 1,206 & 1.95 & 1.80 & 3.75 \\
-Large & JSON & 62,060 & 365.84 & 297.29 & 663.13 \\
- & MessagePack & 52,144 & 181.95 & 261.94 & 443.90 \\
- & Pickle & 45,257 & 168.70 & 176.55 & 345.25 \\
-Binary & JSON & 34,261 & 61.49 & 25.63 & 87.12 \\
- & MessagePack & 34,226 & 3.46 & 4.23 & 7.69 \\
- & Pickle & 34,272 & 3.18 & 4.53 & 7.71 \\
+Small & JSON & 133 & 2.62 & 2.26 & 4.89 \\
+ & MessagePack & 97 & 1.45 & 1.03 & 2.48 \\
+ & Pickle & 140 & 1.64 & 1.19 & 2.83 \\
+Medium & JSON & 1,208 & 5.67 & 3.75 & 9.42 \\
+ & MessagePack & 1,151 & 1.93 & 1.67 & 3.60 \\
+ & Pickle & 1,206 & 1.97 & 1.83 & 3.80 \\
+Large & JSON & 62,060 & 362.11 & 297.97 & 660.08 \\
+ & MessagePack & 52,144 & 185.90 & 258.75 & 444.65 \\
+ & Pickle & 45,257 & 177.05 & 177.94 & 354.99 \\
+Binary & JSON & 34,261 & 63.76 & 26.49 & 90.25 \\
+ & MessagePack & 34,226 & 3.43 & 4.33 & 7.76 \\
+ & Pickle & 34,272 & 3.12 & 4.55 & 7.67 \\
 \bottomrule
 \end{tabular}
 \end{table}

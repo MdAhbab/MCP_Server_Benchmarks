@@ -1621,3 +1621,119 @@ For issues with this benchmarking guide, consult:
 - MCP SDK Documentation: https://modelcontextprotocol.io
 - Python MCP: https://github.com/modelcontextprotocol/python-sdk
 - TypeScript MCP: https://github.com/modelcontextprotocol/typescript-sdk
+
+
+---
+
+# Peer-Review Response and Revision Log (July 5, 2026)
+
+This section documents the full revision of the paper (`main.tex`) and this benchmark suite in response to (a) the external peer review in `mcp_survey_peer_review.md` (written for an IJCAI-style venue) and (b) our own professional review pass targeting the actual submission venue, **IEEE Transactions on Sustainable Computing (TSUSC)**. Every issue below is either fixed in the paper, fixed in this code base, or answered explicitly.
+
+## A. Problems Identified and How They Were Fixed
+
+### A.1 Problems raised by the external review
+
+| # | Review finding | Resolution |
+|---|---|---|
+| 1 | **"Exponential energy savings" from O(n^2) attention is mathematically wrong** (savings are quadratic/super-linear, not exponential). | All occurrences of "exponential" removed. The paper now states: self-attention is O(n^2) in context length, so token reductions yield *at-least-proportional* energy savings, with the attention term shrinking approximately quadratically. Fixed in the abstract, Sections I, V, VI-B, and the Conclusion. |
+| 2 | **Contradictory offloading direction** ("offload to the LLM" vs. "from the LLM to solvers"). | The sentence "MCP servers explicitly offload large-scale mathematical computations *to the LLM*" was a typo and is corrected. Section VII now defines offloading once, explicitly: offloading always means moving work *off* the GPU-bound LLM, in two forms (data-plane offloading via code execution; compute-plane offloading via deterministic solvers), including the task regimes where each applies. |
+| 3 | **Serialization experiments (MessagePack/Pickle) are not spec-compliant** since MCP mandates JSON-RPC 2.0. | The subsection is retitled "Transport Serialisation Overhead: A What-If Analysis" and states in italics that binary-format results are *prospective, not specification-compliant*. The table caption says the same. A new paragraph covers compatibility (capability-flag content negotiation with JSON-RPC fallback), security review of binary parsers, observability trade-offs, and an incremental deployment path (binary framing for high-volume resource payloads only, JSON control plane retained). Pickle is explicitly labelled unsafe for untrusted input and *not* proposed for MCP. |
+| 4 | **Anomalous power result: mixed workload (22.6 W) below idle (26.4 W).** | Root cause confirmed as a measurement artifact: v1 sampled *system-wide* CPU, and the idle window was contaminated by background OS activity (the raw log shows a 78.6% CPU spike during "idle"). `energy_benchmark.py` was rewritten (v2) with **process-level attribution**: each workload is charged only for the CPU cycles its own process consumes. Re-run results: idle = 0.00 W attributed (baseline), mixed = 0.53 W, JSON = 3.76 W, heavy compute = 3.78 W. Every active workload now sits strictly above idle, as physics requires. The paper explains the pilot artifact and the fix. |
+| 5 | **Opaque energy instrumentation** (no sampling rate, calibration, isolation details). | The paper now has a dedicated "Experimental Setup and Measurement Card" subsection (Section VI-A) stating: hardware, OS, Python version, the exact power model equations (P_sys = TDP*(0.30 + 0.70*u_sys); P_attr = 0.70*TDP*u_proc), 500 ms sampling, 30 s windows, warm-up discard, cool-down, and the isolation strategy. It states plainly that these are utilisation-model **estimates**, not wall-power measurements, and that RAPL/hardware-meter validation is future work. The same methodology block is embedded in the results JSON. |
+| 6 | **Missing baselines/trials/variance; harness effects not addressed.** | Two-part fix. (1) Honest scoping: none of our experiments has an LLM controller in the loop, so harness effects *cannot* confound them; this is now stated explicitly, citing the harness-variance paper (arXiv:2605.23950). End-to-end success rates in the paper are clearly labelled as compiled from published third-party benchmarks (MCP-Universe), not our rig. (2) Statistics: caching and scalability benchmarks now use fixed seeds (42) and 5 repetitions with mean +/- SD reported in the paper's tables; serialization already used 5,000 iterations and now surfaces its SDs; token counts are deterministic (bit-identical across runs), which the paper now says explicitly. |
+| 7 | **Impossible "100.0%" reductions in Tables I and VII.** | Rounding artifact confirmed: raw value was 99.95%, displayed with a one-decimal format. `analyze_results.py` and `token_benchmark.py` now print two decimals, and the paper reports 94.74 / 98.93 / 99.46 / 99.89 / 99.95 with the reduction formula stated in Section VI-A: (T_verbose - T_optimised)/T_verbose x 100, two decimal places. The text notes the reduction approaches but never reaches 100%. |
+| 8 | **Editorial artifacts and promotional tone** ("AGI nervous system", "fastest, most secure and greenest backbone", boilerplate dates). | The manuscript date is current (2026). All hyperbole removed or hedged: no "nervous system", no "greenest backbone", no "shocking"/"disturbing"/"groundbreaking"/"unbreakable", no AGI-ubiquity claims. The future-facing section is retitled "Open Challenges and Future Research Directions" and its speculative parts are explicitly framed as an outlook, not predictions. |
+| 9 | **Missing related work** (harness variance, MemAct, memory survey, SWE-Pruner, Claw-Eval). | All five suggested works were **independently verified to exist on arXiv before citing** (an AI-generated review can hallucinate references; these did not). All are now integrated: a positioning paragraph in Section III, methodological use in Section VI-A (harness disclosure, audited reporting), a "Learned Context Policies" subsection in Section VII (MemAct, SWE-Pruner), Claw-Eval in the security section, and the sleeper-memory-poisoning paper (arXiv:2605.15338) in the threat analysis. References grew from 37 to 43 (TSUSC cap: 45). |
+
+### A.2 Additional problems we found ourselves (not in the external review)
+
+1. **TSUSC does not accept surveys.** The journal's own guidelines state: "TSUSC does not accept submissions of survey or review articles." The old title ("...A Survey of Architectures...") was a desk-reject. The paper is reframed as a regular research paper: new title "Energy-Efficient Model Context Protocol Servers: Architectural Taxonomy, Empirical Benchmarks, and Optimisation Strategies for Sustainable Agentic AI", contributions reordered to lead with the reproducible benchmark suite, and every self-reference to "survey" removed.
+2. **Miscitation of the tool-fusion result.** The "12% latency reduction" claim was cited to MPC-Pipe (a secure multi-party computation paper, unrelated). The correct source is "An LLM-Tool Compiler for Fused Parallel Function Calling" (Singh et al., arXiv:2405.17438; up to 40% cost and 12% latency reduction). Verified and fixed.
+3. **Factually wrong batching claim.** "Recent versions require JSON-RPC batching" is incorrect: batching was added in the 2025-03-26 MCP revision and **removed** in the 2025-06-18 revision. The paper now states this history and notes parallelism comes from concurrent tool invocations.
+4. **"Semantic caching" mislabel.** The caching benchmark implements *exact-match* caching (MD5 of tool name + canonicalised arguments), not embedding-based semantic caching. The paper and this suite now say "exact-match response caching"; semantic caching remains discussed as a literature technique that would perform at least as well.
+5. **Token-count inconsistency across benchmarks.** The scalability benchmark estimated tokens as chars/4 while the token benchmark used tiktoken. `scalability_benchmark.py` now uses tiktoken cl100k_base (with chars/4 fallback), and the paper's Table IV was regenerated (142,202 tokens at 100 servers, previously 156,075 under the heuristic).
+6. **Internal inconsistency: "10,000 requests per day" in the paper vs. 480,000 in the results JSON.** The paper now states the scenario assumptions once (480,000 requests/day at 100 req/s) next to the numbers derived from them.
+7. **Misattribution: "Skywork AI" credited for MCP-Solver.** MCP-Solver is by Szeider (arXiv:2501.00539). Removed.
+8. **Success-rate misreading.** "43.72% success ... more than half of all tool calls fail" conflated task-level and call-level failure. Corrected to task-level phrasing.
+9. **Stale figure captions.** All captions now match the regenerated figures and current data (energy figure: 4.88 Wh vs 0.06 Wh; caching: 12.4x; dashboard totals updated), and literature-derived illustrative charts (Images/Chart 1-4) are explicitly labelled as illustrative or literature-synthesised in their captions.
+10. **Mixing measured and modelled quantities.** The reviewer's underlying concern in 3.2 is fully addressed structurally: every energy number in the paper is now tagged as either a *measurement* (utilisation-model, process-attributed, with SD) or a *scenario analysis / extrapolation* (the 98.7% payload-reduction scenario), and the production estimate states its assumptions inline.
+
+## B. Changes to This Benchmark Suite (code)
+
+- **`energy_benchmark.py` (rewritten, v2):** samples both system-wide and per-process CPU every 500 ms over 30 s windows (first sample discarded; 3 s cool-downs); reports mean/median/SD for whole-system and workload-attributed power; embeds the full methodology block (power model equations, isolation statement, limitations) in the output JSON; the heavy-computation workload is now genuinely CPU-bound; production/optimization figures are explicitly labelled scenario analyses and computed from *attributed* energy.
+- **`caching_benchmark.py`:** fixed seed (42); each scenario repeated 5 times; JSON reports mean +/- SD for speedup and hit rate plus per-run speedups; header note documents simulated latencies and exact-match semantics.
+- **`scalability_benchmark.py`:** fixed seed (42); initialization benchmark repeated 5 times with mean +/- SD; token counting upgraded to tiktoken cl100k_base with chars/4 fallback; JSON records the estimation method and the mock/simulated nature of latencies.
+- **`token_benchmark.py`:** JSON now records the tokenizer, the exact reduction formula, and a determinism note; console output uses two decimals.
+- **`serialization_benchmark.py`:** JSON now carries a spec-compliance note (JSON-RPC mandated; MessagePack/Pickle prospective; Pickle unsafe for untrusted input).
+- **`analyze_results.py` / `visualize_results.py`:** two-decimal reductions (no more impossible 100.0%); energy table/figure use process-attributed power with SD error bars and honest "estimated" titles; caching chart gains SD error bars; both remain backward-compatible with v1 result files.
+
+### Headline numbers: before vs. after re-run (July 5, 2026)
+
+| Metric | Old (v1, unseeded/contaminated) | New (v2, seeded, attributed) |
+|---|---|---|
+| Token reduction (1,000 items) | "100.0%" (display artifact) | 99.95% |
+| Caching speedup (very high repetition) | 18.8x (single run) | 12.4 +/- 2.6x (5 seeded runs) |
+| Caching speedup (low repetition) | 4.7x | 5.0 +/- 0.2x |
+| Tool-definition tokens @ 100 servers | 156,075 (chars/4) | 142,202 (tiktoken, exact) |
+| Context usage @ 25 servers (GPT-4) | 30.4% | 27.8% |
+| Idle vs. mixed workload power | 26.4 W vs 22.6 W (anomaly) | 0.00 W vs 0.53 W attributed (correct ordering) |
+| Serialization (large, JSON vs MsgPack) | 663 vs 444 us | 660 vs 445 us (stable) |
+| Annual energy saving scenario | 12.63 kWh/node | 1.76 kWh/node (attributed basis, assumptions stated) |
+
+The old caching and energy numbers were not wrong so much as unreproducible and, in the energy case, artifact-laden; the new numbers are smaller but defensible, seeded, and carry uncertainty estimates. The paper reports only the new numbers.
+
+## C. Answers to the Review's "Questions for Authors"
+
+**Q1. Energy methodology: how were measurements obtained/controlled, and how can a mixed workload consume less than idle?**
+Power was never physically measured; v1 used a CPU-utilisation proxy (P = 0.3*TDP + 0.7*TDP*u_sys) sampled from *system-wide* utilisation at 500 ms intervals. The "mixed < idle" result was an artifact of background OS activity contaminating the idle window (raw log: 78.6% CPU spike during idle). The v2 methodology attributes power per process: P_attr = 0.7*TDP*(u_proc/n_cores). Under attribution, idle = 0.00 W and every active workload exceeds it. Sampling rate, window length, warm-up discard, cool-downs, and the model equations are now in the paper (Section VI-A) and in `results/energy_benchmark_results.json`. We state explicitly that absolute values are estimates and that relative comparisons are the meaningful quantity; RAPL/wall-meter validation is future work.
+
+**Q2. Harness/controller specifications, models, trials, variance?**
+There is no harness: no experiment in the paper places an LLM controller in the loop, by design, precisely because harness configuration dominates variance in end-to-end evaluations (arXiv:2605.23950, now cited). Our measurements are protocol/payload-level: tiktoken cl100k_base token counts (deterministic, zero variance), perf_counter timings (5,000 iterations, SDs logged), and seeded workloads (seed 42, 5 repetitions, mean +/- SD in every affected table). The only model-dependent numbers (MCP-Universe success rates) are quoted from the published third-party benchmark and labelled as such.
+
+**Q3. Statistical integrity of "exactly 100.0%" values?**
+Rounding artifact, not fabrication. Raw logs (committed in `results/`) show 99.95% at 1,000 items; the display format was `%.1f`. The formula is (T_v - T_o)/T_v * 100; the policy is now two-decimal reporting everywhere; raw JSONs are public in this repository for auditing.
+
+**Q4. Are the MessagePack/Pickle results a spec-extension proposal?**
+Yes, and the paper now says so explicitly. They are labelled prospective/non-compliant in the subsection title, body, and table caption. The requested discussion was added: backward compatibility via capability negotiation with JSON-RPC fallback; security review of binary parsers (and Pickle explicitly excluded as unsafe); observability costs of losing human-readable payloads; incremental path restricting binary framing to high-volume resource payloads.
+
+**Q5. Which offloading direction is intended?**
+Off the LLM, always. The "to the LLM" sentence was an error, now corrected. The paper defines two forms (data-plane: code execution moves bulk data out of the context window; compute-plane: solver servers move exact mathematics from GPU inference to CPU solvers) and gives the task regimes for each (formal structure -> solvers; open-ended transformation -> code execution).
+
+**Q6. Experimental details for CA-MCP (45.5%) and REP (41.8%/47%)?**
+These are the proposing authors' published results, not ours, and the revised paper says so in plain words. Our suite contains no multi-agent workloads; the figures are quoted with attribution, the illustrative chart is captioned as literature-derived, and the paper notes that the original studies do not disclose harness details at the level our measurement card requires. Independent reproduction is listed under future research (audited, harness-disclosed multi-agent benchmarks).
+
+**Q7. Interaction with MemAct-style memory policies and SWE-Pruner-style pruning?**
+They are complementary and now integrated in the paper: model-side learned memory editing and goal-conditioned pruning attack the same token economy from the client side, while our server-side techniques (progressive disclosure, hierarchical discovery, caching) attack it from the protocol side. Section VII proposes the concrete integration the reviewer hints at: embedding goal-conditioned pruning *inside* MCP resource servers as standardised pre-filtered read operations, so servers return pruned payloads instead of raw files. This is also listed as a future research direction.
+
+## D. Additional Questions a TSUSC Reviewer Might Ask (with answers)
+
+**D1. Why is this in scope for TSUSC and not a survey?**
+The paper's core is an original, reproducible empirical study of energy-relevant protocol behaviour (tokens, transport, caching, scaling, estimated power) plus a taxonomy and derived recommendations. The related-work coverage supports, but does not replace, the original measurements. The title, abstract, and contributions were rewritten accordingly, because TSUSC explicitly rejects surveys.
+
+**D2. Why not use RAPL or a wall-power meter?**
+The experiments ran on Windows 11, where RAPL access is not natively exposed, and no hardware meter was available. Rather than present proxy numbers as measurements, the paper (i) publishes the exact power model, (ii) reports process-attributed values with SDs, (iii) restricts claims to relative comparisons, and (iv) names hardware validation as future work. The benchmark scripts run unchanged on Linux, where readers can add RAPL cross-checks.
+
+**D3. Why are JSON processing and heavy computation nearly equal in attributed power (~3.8 W)?**
+Both are single-threaded and saturate one logical processor out of twelve, so the utilisation model assigns them nearly identical draw. The paper explains this and draws the correct conclusion: at equal power, what differs is useful work per joule, which is the argument for solver offloading.
+
+**D4. Aren't the caching speedups just a function of your simulated latencies?**
+Yes, deliberately: simulated 50/75/100 ms service times isolate protocol/cache behaviour from network noise and bound the achievable speedup, which is why we report 12.4x rather than the literature's "up to 100x". This bounding is stated in the paper.
+
+**D5. Token counts use cl100k_base; do results transfer to other tokenizers?**
+The *ratios* (the quantity we claim) are robust because both verbose and optimised payloads are tokenized identically; absolute counts vary by a small constant factor across modern BPE tokenizers. Byte counts are also reported in the JSON as a tokenizer-independent check.
+
+**D6. Is a 1.76 kWh/node/year saving significant?**
+Per node it is modest, and the paper does not inflate it: the estimate covers server-side CPU only and explicitly excludes LLM-side inference energy, where the same token reductions act on a cost that is orders of magnitude larger and quadratic in context length. The server-side figure demonstrates the accounting method; the inference-side savings are the dominant effect.
+
+**D7. Can everything be reproduced?**
+Yes: `python run_all_benchmarks.py` regenerates all JSONs, `python visualize_results.py` regenerates all figures, and `python analyze_results.py` regenerates the LaTeX tables. Seeds are fixed; the energy benchmark is the only wall-clock-sensitive component (about 2.5 minutes). On Windows, set `PYTHONUTF8=1` to avoid console encoding errors. Requirements: `psutil`, `tiktoken`, `msgpack`, `matplotlib`, `numpy`.
+
+**D8. Who wrote the paper?**
+The three listed human authors. No AI system is an author, collaborator, or acknowledged contributor.
+
+## E. Verification Notes
+
+- All six review-suggested references were verified to exist on arXiv before citation (titles and author lists checked on July 5, 2026): 2605.23950, 2510.12635, 2605.06716, 2601.16746, 2604.06132, 2605.15338.
+- The full benchmark suite was re-run end-to-end on July 5, 2026 (368 s total, all five benchmarks passing) on the same i5-10400 machine used for the original results; every number in the paper's Section VI was transcribed from the fresh JSONs in `results/`.
+- Remaining pre-submission tasks (ORCID registration, IEEE LaTeX Analyzer, final page-count check, cover letter) are listed in `IEEE_TSUSC_Submission_Guidelines.md` at the repository root.
+

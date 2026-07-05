@@ -14,6 +14,10 @@ from typing import Dict, Any, Optional
 from functools import lru_cache
 import random
 
+# Reproducibility and statistical rigour (added after peer review)
+RANDOM_SEED = 42
+SCENARIO_REPETITIONS = 5  # each scenario is repeated; mean +/- std reported
+
 
 class InMemoryCache:
     """Simple in-memory cache with TTL support"""
@@ -221,9 +225,17 @@ def run_benchmark():
     
     results = {
         "timestamp": time.strftime("%Y-%m-%d %H:%M:%S"),
+        "random_seed": RANDOM_SEED,
+        "repetitions_per_scenario": SCENARIO_REPETITIONS,
+        "note": (
+            "Service latencies are simulated (sleep-based: DB 50ms, API 100ms, "
+            "compute 75ms). The cache is EXACT-MATCH keyed on tool name + "
+            "canonicalised arguments (not embedding-based semantic caching). "
+            "Each scenario repeated; speedup/hit-rate reported as mean +/- std."
+        ),
         "scenarios": []
     }
-    
+
     # Test different cache hit ratios
     scenarios = [
         {"name": "Low repetition (70% unique)", "unique_ratio": 0.7, "requests": 100},
@@ -231,54 +243,99 @@ def run_benchmark():
         {"name": "High repetition (30% unique)", "unique_ratio": 0.3, "requests": 100},
         {"name": "Very high repetition (10% unique)", "unique_ratio": 0.1, "requests": 100},
     ]
-    
+
     print("\n--- Scenario Comparison ---\n")
-    
+
     for scenario in scenarios:
-        print(f"\nScenario: {scenario['name']}")
+        print(f"\nScenario: {scenario['name']} ({SCENARIO_REPETITIONS} repetitions)")
         print("-" * 50)
-        
-        # Generate workload
-        workload = generate_workload(
-            num_requests=scenario['requests'],
-            unique_ratio=scenario['unique_ratio']
-        )
-        
-        # Benchmark without cache
-        server_no_cache = MCPServerWithoutCache()
-        no_cache_results = benchmark_server(server_no_cache, workload)
-        
-        # Benchmark with cache
-        server_with_cache = MCPServerWithCache(cache_ttl=300)
-        with_cache_results = benchmark_server(server_with_cache, workload)
-        
-        # Calculate improvements
-        speedup = no_cache_results['total_time_ms'] / with_cache_results['total_time_ms']
-        time_reduction = (no_cache_results['total_time_ms'] - with_cache_results['total_time_ms']) / no_cache_results['total_time_ms'] * 100
-        
-        print(f"\nWithout Cache:")
-        print(f"  Total time: {no_cache_results['total_time_ms']:.2f} ms")
-        print(f"  Mean latency: {no_cache_results['mean_latency_ms']:.2f} ms")
-        
-        print(f"\nWith Cache:")
-        print(f"  Total time: {with_cache_results['total_time_ms']:.2f} ms")
-        print(f"  Mean latency: {with_cache_results['mean_latency_ms']:.2f} ms")
-        print(f"  Cache hit rate: {server_with_cache.cache.hit_rate:.1f}%")
-        print(f"  Actual operations: {server_with_cache.actual_operations}/{server_with_cache.call_count}")
-        
+
+        reps = []
+        for rep in range(SCENARIO_REPETITIONS):
+            # Deterministic but distinct workload per repetition
+            random.seed(RANDOM_SEED + rep)
+            workload = generate_workload(
+                num_requests=scenario['requests'],
+                unique_ratio=scenario['unique_ratio']
+            )
+
+            # Benchmark without cache
+            server_no_cache = MCPServerWithoutCache()
+            no_cache_results = benchmark_server(server_no_cache, workload)
+
+            # Benchmark with cache
+            server_with_cache = MCPServerWithCache(cache_ttl=300)
+            with_cache_results = benchmark_server(server_with_cache, workload)
+
+            speedup = no_cache_results['total_time_ms'] / with_cache_results['total_time_ms']
+            time_reduction = (no_cache_results['total_time_ms'] - with_cache_results['total_time_ms']) / no_cache_results['total_time_ms'] * 100
+
+            reps.append({
+                "without_cache": no_cache_results,
+                "with_cache": with_cache_results,
+                "hit_rate": server_with_cache.cache.hit_rate,
+                "cache_stats": server_with_cache.cache.stats,
+                "speedup": speedup,
+                "time_reduction_percent": time_reduction,
+            })
+
+        # Aggregate across repetitions (mean of each summary statistic)
+        def agg(key_path):
+            vals = []
+            for r in reps:
+                v = r
+                for k in key_path:
+                    v = v[k]
+                vals.append(v)
+            return vals
+
+        def mean_of(key_path):
+            return statistics.mean(agg(key_path))
+
+        speedups = [r["speedup"] for r in reps]
+        hit_rates = [r["hit_rate"] for r in reps]
+
+        without_cache_mean = {
+            k: mean_of(["without_cache", k]) for k in reps[0]["without_cache"]
+        }
+        with_cache_mean = {
+            k: mean_of(["with_cache", k]) for k in reps[0]["with_cache"]
+        }
+
+        speedup_mean = statistics.mean(speedups)
+        speedup_std = statistics.stdev(speedups)
+        hit_rate_mean = statistics.mean(hit_rates)
+        hit_rate_std = statistics.stdev(hit_rates)
+        time_reduction_mean = statistics.mean([r["time_reduction_percent"] for r in reps])
+
+        print(f"\nWithout Cache (mean over {SCENARIO_REPETITIONS} runs):")
+        print(f"  Total time: {without_cache_mean['total_time_ms']:.2f} ms")
+        print(f"  Mean latency: {without_cache_mean['mean_latency_ms']:.2f} ms")
+
+        print(f"\nWith Cache (mean over {SCENARIO_REPETITIONS} runs):")
+        print(f"  Total time: {with_cache_mean['total_time_ms']:.2f} ms")
+        print(f"  Mean latency: {with_cache_mean['mean_latency_ms']:.2f} ms")
+        print(f"  Cache hit rate: {hit_rate_mean:.1f}% (±{hit_rate_std:.1f})")
+
         print(f"\nImprovement:")
-        print(f"  Speedup: {speedup:.1f}x")
-        print(f"  Time reduction: {time_reduction:.1f}%")
-        
+        print(f"  Speedup: {speedup_mean:.1f}x (±{speedup_std:.1f})")
+        print(f"  Time reduction: {time_reduction_mean:.1f}%")
+
         scenario_result = {
             "scenario": scenario['name'],
             "unique_ratio": scenario['unique_ratio'],
             "requests": scenario['requests'],
-            "without_cache": no_cache_results,
-            "with_cache": with_cache_results,
-            "cache_stats": server_with_cache.cache.stats,
-            "speedup": speedup,
-            "time_reduction_percent": time_reduction
+            "repetitions": SCENARIO_REPETITIONS,
+            "without_cache": without_cache_mean,
+            "with_cache": with_cache_mean,
+            "cache_stats": {
+                "hit_rate": hit_rate_mean,
+                "hit_rate_std": hit_rate_std,
+            },
+            "speedup": speedup_mean,
+            "speedup_std": speedup_std,
+            "speedup_per_run": speedups,
+            "time_reduction_percent": time_reduction_mean
         }
         results["scenarios"].append(scenario_result)
     
@@ -287,7 +344,8 @@ def run_benchmark():
     print("Latency Distribution Analysis (High Repetition Scenario)")
     print("=" * 70 + "\n")
     
-    # Detailed workload for distribution analysis
+    # Detailed workload for distribution analysis (seeded for reproducibility)
+    random.seed(RANDOM_SEED)
     workload = generate_workload(num_requests=500, unique_ratio=0.2)
     
     server_no_cache = MCPServerWithoutCache()

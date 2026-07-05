@@ -54,7 +54,8 @@ def generate_token_latex_table(results: Dict) -> str:
 """
     
     for s in scenarios:
-        latex += f"{s['dataset_size']} items & {s['verbose_tokens']:,} & {s['optimized_tokens']:,} & {s['reduction_percent']:.1f}\\% \\\\\n"
+        # Two decimals: 99.95% must never be rendered as an impossible 100.0%
+        latex += f"{s['dataset_size']} items & {s['verbose_tokens']:,} & {s['optimized_tokens']:,} & {s['reduction_percent']:.2f}\\% \\\\\n"
     
     latex += r"""\bottomrule
 \end{tabular}
@@ -171,18 +172,27 @@ def generate_energy_latex_table(results: Dict) -> str:
     latex = r"""
 \begin{table}[h]
 \centering
-\caption{Energy Consumption by MCP Workload Type}
+\caption{Estimated Energy by MCP Workload Type (Utilisation Model, Process-Attributed)}
 \label{tab:energy_benchmark}
 \begin{tabular}{lrrrr}
 \toprule
-\textbf{Workload} & \textbf{Avg CPU (\%)} & \textbf{Avg Power (W)} & \textbf{vs Idle} & \textbf{Energy (Wh)} \\
+\textbf{Workload} & \textbf{Proc.\ CPU (\%)} & \textbf{Attr.\ Power (W)} & \textbf{vs Idle} & \textbf{Energy (Wh)} \\
 \midrule
 """
     
+    # Prefer workload-attributed power (v2 results); fall back to system power
+    use_attr = all("avg_attributed_power_watts" in w for w in workloads)
+    power_key = "avg_attributed_power_watts" if use_attr else "avg_power_watts"
+    energy_key = "attributed_energy_wh" if use_attr else "energy_wh"
+    cpu_key = "avg_process_cpu_percent" if use_attr else "avg_cpu_percent"
+
     for w in workloads:
-        overhead = ((w['avg_power_watts'] - idle['avg_power_watts']) / idle['avg_power_watts'] * 100)
-        overhead_str = f"+{overhead:.1f}\\%" if overhead > 0 else "baseline"
-        latex += f"{w['name'].split('(')[0].strip()} & {w['avg_cpu_percent']:.1f} & {w['avg_power_watts']:.1f} & {overhead_str} & {w['energy_wh']:.4f} \\\\\n"
+        if w is idle:
+            overhead_str = "baseline"
+        else:
+            marginal = w[power_key] - idle[power_key]
+            overhead_str = f"+{marginal:.2f}~W"
+        latex += f"{w['name'].split('(')[0].strip()} & {w[cpu_key]:.1f} & {w[power_key]:.2f} & {overhead_str} & {w[energy_key]:.4f} \\\\\n"
     
     latex += r"""\bottomrule
 \end{tabular}
@@ -210,7 +220,7 @@ def generate_summary_latex_table(results: Dict) -> str:
         scenarios = [s for s in token_data.get("scenarios", []) if s["type"] == "response_pattern"]
         if scenarios:
             best = max(scenarios, key=lambda x: x["reduction_percent"])
-            latex += f"Token Efficiency & Verbose vs Optimized & {best['reduction_percent']:.1f}\\% reduction & Proportional inference energy savings \\\\\n\\addlinespace\n"
+            latex += f"Token Efficiency & Verbose vs Optimized & {best['reduction_percent']:.2f}\\% reduction & Proportional inference energy savings \\\\\n\\addlinespace\n"
     
     # Serialization
     if "serialization" in results:
@@ -387,7 +397,7 @@ def main():
         scenarios = [s for s in results["token"].get("scenarios", []) if s["type"] == "response_pattern"]
         if scenarios:
             best = max(scenarios, key=lambda x: x["reduction_percent"])
-            print(f"\n• Token Reduction: {best['reduction_percent']:.1f}% (validates ~98.7% literature claim)")
+            print(f"\n• Token Reduction: {best['reduction_percent']:.2f}% (consistent with ~98.7% literature claim)")
     
     if "caching" in results:
         scenarios = results["caching"].get("scenarios", [])

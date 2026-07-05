@@ -20,11 +20,11 @@ We implemented prototype MCP servers following both traditional verbose response
 \toprule
 \textbf{Dataset Size} & \textbf{Verbose} & \textbf{Optimized} & \textbf{Reduction} \\
 \midrule
-10 items & 3,023 & 159 & 94.7\% \\
-50 items & 14,876 & 159 & 98.9\% \\
-100 items & 29,693 & 159 & 99.5\% \\
-500 items & 148,226 & 159 & 99.9\% \\
-1000 items & 296,394 & 160 & 100.0\% \\
+10 items & 3,023 & 159 & 94.74\% \\
+50 items & 14,876 & 159 & 98.93\% \\
+100 items & 29,693 & 159 & 99.46\% \\
+500 items & 148,226 & 159 & 99.89\% \\
+1000 items & 296,394 & 160 & 99.95\% \\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -42,20 +42,20 @@ MCP's exclusive use of JSON-RPC 2.0 introduces serialization overhead compared t
 \label{tab:serialization_benchmark}
 \begin{tabular}{llrrrr}
 \toprule
-\textbf{Payload} & \textbf{Format} & \textbf{Size (B)} & \textbf{Ser. (µs)} & \textbf{Deser. (µs)} & \textbf{Total (µs)} \\
+\textbf{Payload} & \textbf{Format} & \textbf{Size (B)} & \textbf{Ser. (Âµs)} & \textbf{Deser. (Âµs)} & \textbf{Total (Âµs)} \\
 \midrule
-Small & JSON & 133 & 2.66 & 2.31 & 4.98 \\
- & MessagePack & 97 & 3.23 & 1.24 & 4.46 \\
- & Pickle & 140 & 1.98 & 1.59 & 3.57 \\
-Medium & JSON & 1,208 & 5.89 & 3.69 & 9.58 \\
- & MessagePack & 1,151 & 2.20 & 1.65 & 3.85 \\
- & Pickle & 1,206 & 1.95 & 1.80 & 3.75 \\
-Large & JSON & 62,060 & 365.84 & 297.29 & 663.13 \\
- & MessagePack & 52,144 & 181.95 & 261.94 & 443.90 \\
- & Pickle & 45,257 & 168.70 & 176.55 & 345.25 \\
-Binary & JSON & 34,261 & 61.49 & 25.63 & 87.12 \\
- & MessagePack & 34,226 & 3.46 & 4.23 & 7.69 \\
- & Pickle & 34,272 & 3.18 & 4.53 & 7.71 \\
+Small & JSON & 133 & 2.62 & 2.26 & 4.89 \\
+ & MessagePack & 97 & 1.45 & 1.03 & 2.48 \\
+ & Pickle & 140 & 1.64 & 1.19 & 2.83 \\
+Medium & JSON & 1,208 & 5.67 & 3.75 & 9.42 \\
+ & MessagePack & 1,151 & 1.93 & 1.67 & 3.60 \\
+ & Pickle & 1,206 & 1.97 & 1.83 & 3.80 \\
+Large & JSON & 62,060 & 362.11 & 297.97 & 660.08 \\
+ & MessagePack & 52,144 & 185.90 & 258.75 & 444.65 \\
+ & Pickle & 45,257 & 177.05 & 177.94 & 354.99 \\
+Binary & JSON & 34,261 & 63.76 & 26.49 & 90.25 \\
+ & MessagePack & 34,226 & 3.43 & 4.33 & 7.76 \\
+ & Pickle & 34,272 & 3.12 & 4.55 & 7.67 \\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -75,10 +75,10 @@ Response caching significantly reduces redundant computation for repeated querie
 \toprule
 \textbf{Scenario} & \textbf{Without Cache (ms)} & \textbf{With Cache (ms)} & \textbf{Hit Rate} & \textbf{Speedup} \\
 \midrule
-Low repetition & 6916.1 & 1486.0 & 79.0\% & 4.7x \\
-Medium repetition & 7695.1 & 1335.4 & 82.0\% & 5.8x \\
-High repetition & 7919.9 & 1260.2 & 83.0\% & 6.3x \\
-Very high repetition & 8516.9 & 453.7 & 94.0\% & 18.8x \\
+Low repetition & 7508.0 & 1501.9 & 78.8\% & 5.0x \\
+Medium repetition & 7284.8 & 1406.5 & 80.4\% & 5.2x \\
+High repetition & 7141.1 & 1235.1 & 82.6\% & 5.8x \\
+Very high repetition & 6950.7 & 570.2 & 91.6\% & 12.4x \\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -98,12 +98,12 @@ Testing with increasing numbers of MCP servers reveals context window consumptio
 \toprule
 \textbf{Servers} & \textbf{Tools} & \textbf{Init (ms)} & \textbf{Tokens} & \textbf{GPT-4 \%} & \textbf{Claude \%} \\
 \midrule
-1 & 10 & 17.6 & 1,554 & 1.2 & 0.8 \\
-5 & 50 & 15.4 & 7,770 & 6.1 & 3.9 \\
-10 & 100 & 24.0 & 15,540 & 12.1 & 7.8 \\
-25 & 250 & 26.3 & 38,963 & 30.4 & 19.5 \\
-50 & 500 & 25.1 & 78,000 & 60.9 & 39.0 \\
-100 & 1000 & 23.7 & 156,075 & 121.9 & 78.0 \\
+1 & 10 & 14.6 & 1,424 & 1.1 & 0.7 \\
+5 & 50 & 15.2 & 7,112 & 5.6 & 3.6 \\
+10 & 100 & 20.7 & 14,222 & 11.1 & 7.1 \\
+25 & 250 & 23.1 & 35,552 & 27.8 & 17.8 \\
+50 & 500 & 24.6 & 71,102 & 55.5 & 35.6 \\
+100 & 1000 & 24.1 & 142,202 & 111.1 & 71.1 \\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -117,16 +117,16 @@ Direct power measurements quantify the energy impact of different MCP workload p
 
 \begin{table}[h]
 \centering
-\caption{Energy Consumption by MCP Workload Type}
+\caption{Estimated Energy by MCP Workload Type (Utilisation Model, Process-Attributed)}
 \label{tab:energy_benchmark}
 \begin{tabular}{lrrrr}
 \toprule
-\textbf{Workload} & \textbf{Avg CPU (\%)} & \textbf{Avg Power (W)} & \textbf{vs Idle} & \textbf{Energy (Wh)} \\
+\textbf{Workload} & \textbf{Proc.\ CPU (\%)} & \textbf{Attr.\ Power (W)} & \textbf{vs Idle} & \textbf{Energy (Wh)} \\
 \midrule
-Idle & 15.1 & 26.4 & baseline & 0.1057 \\
-JSON Processing & 15.0 & 26.3 & baseline & 0.1095 \\
-Heavy Computation & 13.4 & 25.6 & baseline & 0.1039 \\
-Mixed MCP Workload & 6.9 & 22.6 & baseline & 0.0908 \\
+Idle & 0.0 & 0.00 & baseline & 0.0000 \\
+JSON Processing & 8.3 & 3.76 & +3.76~W & 0.0305 \\
+Heavy Computation & 8.3 & 3.78 & +3.78~W & 0.0305 \\
+Mixed MCP Workload & 1.2 & 0.53 & +0.53~W & 0.0043 \\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -142,15 +142,15 @@ Progressive disclosure optimization could reduce annual energy consumption signi
 \toprule
 \textbf{Category} & \textbf{Metric} & \textbf{Finding} & \textbf{Green Computing Impact} \\
 \midrule
-Token Efficiency & Verbose vs Optimized & 100.0\% reduction & Proportional inference energy savings \\
+Token Efficiency & Verbose vs Optimized & 99.95\% reduction & Proportional inference energy savings \\
 \addlinespace
 Serialization Overhead & JSON vs Binary & +19.0\% size overhead & Network bandwidth and CPU cycles \\
 \addlinespace
-Caching Effectiveness & High repetition workload & 18.8x speedup & Reduced redundant computation \\
+Caching Effectiveness & High repetition workload & 12.4x speedup & Reduced redundant computation \\
 \addlinespace
-Context Scalability & 25 servers & 30.4\% context usage & Requires hierarchical discovery \\
+Context Scalability & 25 servers & 27.8\% context usage & Requires hierarchical discovery \\
 \addlinespace
-Energy Impact & Annual savings potential & 12.63 kWh & Direct electricity reduction \\
+Energy Impact & Annual savings potential & 1.76 kWh & Direct electricity reduction \\
 \bottomrule
 \end{tabular}
 \end{table*}
