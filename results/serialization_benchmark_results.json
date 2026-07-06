@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-07-05 18:44:53",
+  "timestamp": "2026-07-06 11:58:29",
   "iterations": 5000,
   "spec_compliance_note": "The MCP specification mandates JSON-RPC 2.0. MessagePack and Pickle results are PROSPECTIVE measurements motivating an optional binary transport extension; they do NOT reflect spec-compliant MCP behaviour. Pickle is included only as an in-process ceiling: it is unsafe for untrusted network input (arbitrary code execution on load) and is not proposed for MCP.",
   "payloads": {
@@ -7,116 +7,116 @@
       {
         "format": "JSON",
         "size_bytes": 133,
-        "serialize_mean_us": 2.623079999557376,
-        "serialize_std_us": 0.6171413829492908,
-        "deserialize_mean_us": 2.264600001308281,
-        "deserialize_std_us": 1.1089530204439653,
-        "total_mean_us": 4.8876800008656565
+        "serialize_mean_us": 2.690679999795975,
+        "serialize_std_us": 0.5495830658084617,
+        "deserialize_mean_us": 2.1926399994526946,
+        "deserialize_std_us": 0.4315774347847495,
+        "total_mean_us": 4.883319999248669
       },
       {
         "format": "MessagePack",
         "size_bytes": 97,
-        "serialize_mean_us": 1.449920003688021,
-        "serialize_std_us": 0.780129296999976,
-        "deserialize_mean_us": 1.0264200011988578,
-        "deserialize_std_us": 0.5696006248095581,
-        "total_mean_us": 2.476340004886879
+        "serialize_mean_us": 1.5239600001564213,
+        "serialize_std_us": 5.90100654922302,
+        "deserialize_mean_us": 1.052300000071682,
+        "deserialize_std_us": 0.4154963747288778,
+        "total_mean_us": 2.5762600002281033
       },
       {
         "format": "Pickle",
         "size_bytes": 140,
-        "serialize_mean_us": 1.6407200021603785,
-        "serialize_std_us": 0.7803509925355885,
-        "deserialize_mean_us": 1.1910400012311584,
-        "deserialize_std_us": 0.1773640666631793,
-        "total_mean_us": 2.831760003391537
+        "serialize_mean_us": 1.5773399996760418,
+        "serialize_std_us": 0.3743962589265637,
+        "deserialize_mean_us": 1.2562600001842839,
+        "deserialize_std_us": 0.24301568595113196,
+        "total_mean_us": 2.833599999860325
       }
     ],
     "medium": [
       {
         "format": "JSON",
         "size_bytes": 1208,
-        "serialize_mean_us": 5.669799996940128,
-        "serialize_std_us": 0.6468443713370926,
-        "deserialize_mean_us": 3.7512999961109017,
-        "deserialize_std_us": 0.41290726435091524,
-        "total_mean_us": 9.42109999305103
+        "serialize_mean_us": 7.28948000020182,
+        "serialize_std_us": 1.7406870272114832,
+        "deserialize_mean_us": 3.7035799998989205,
+        "deserialize_std_us": 0.3077078487711912,
+        "total_mean_us": 10.99306000010074
       },
       {
         "format": "MessagePack",
         "size_bytes": 1151,
-        "serialize_mean_us": 1.9323600003190224,
-        "serialize_std_us": 0.3628100836677256,
-        "deserialize_mean_us": 1.6672199986714986,
-        "deserialize_std_us": 0.37904644387836944,
-        "total_mean_us": 3.5995799989905213
+        "serialize_mean_us": 2.69594000124016,
+        "serialize_std_us": 0.9220561553065872,
+        "deserialize_mean_us": 1.7256599999200262,
+        "deserialize_std_us": 0.35673101352215836,
+        "total_mean_us": 4.421600001160186
       },
       {
         "format": "Pickle",
         "size_bytes": 1206,
-        "serialize_mean_us": 1.9696399999702408,
-        "serialize_std_us": 0.3282374436465444,
-        "deserialize_mean_us": 1.82648000163681,
-        "deserialize_std_us": 0.20186867171220252,
-        "total_mean_us": 3.7961200016070507
+        "serialize_mean_us": 1.9938799997021306,
+        "serialize_std_us": 1.6592556075122349,
+        "deserialize_mean_us": 1.8885399998566754,
+        "deserialize_std_us": 0.3750770657525933,
+        "total_mean_us": 3.882419999558806
       }
     ],
     "large": [
       {
         "format": "JSON",
         "size_bytes": 62060,
-        "serialize_mean_us": 362.1098400052688,
-        "serialize_std_us": 36.00740721074385,
-        "deserialize_mean_us": 297.9702600003293,
-        "deserialize_std_us": 18.40070440738202,
-        "total_mean_us": 660.0801000055982
+        "serialize_mean_us": 399.08569999945485,
+        "serialize_std_us": 104.42125830154609,
+        "deserialize_mean_us": 307.8754599999115,
+        "deserialize_std_us": 43.999317491741756,
+        "total_mean_us": 706.9611599993664
       },
       {
         "format": "MessagePack",
         "size_bytes": 52144,
-        "serialize_mean_us": 185.89735999566983,
-        "serialize_std_us": 17.90574232304708,
-        "deserialize_mean_us": 258.75249999526204,
-        "deserialize_std_us": 18.402910186129596,
-        "total_mean_us": 444.6498599909319
+        "serialize_mean_us": 191.35212000044248,
+        "serialize_std_us": 49.409871347398905,
+        "deserialize_mean_us": 272.2287200001574,
+        "deserialize_std_us": 93.56913907774921,
+        "total_mean_us": 463.5808400005999
       },
       {
         "format": "Pickle",
         "size_bytes": 45257,
-        "serialize_mean_us": 177.04922000129955,
-        "serialize_std_us": 10.784957228795326,
-        "deserialize_mean_us": 177.93988000139507,
-        "deserialize_std_us": 26.155631380442806,
-        "total_mean_us": 354.9891000026946
+        "serialize_mean_us": 178.3634600002074,
+        "serialize_std_us": 34.649079909361554,
+        "deserialize_mean_us": 224.5900000001825,
+        "deserialize_std_us": 83.10981210465494,
+        "total_mean_us": 402.9534600003899
       }
     ],
     "binary": [
       {
         "format": "JSON",
         "size_bytes": 34261,
-        "serialize_mean_us": 63.75620000417257,
-        "serialize_std_us": 14.054235728975424,
-        "deserialize_mean_us": 26.49092000019664,
-        "deserialize_std_us": 1.529824048657152,
-        "total_mean_us": 90.24712000436921
+        "serialize_mean_us": 63.96674000043276,
+        "serialize_std_us": 11.246876287101253,
+        "deserialize_mean_us": 26.349219999542584,
+        "deserialize_std_us": 4.042918306559482,
+        "total_mean_us": 90.31595999997533
       },
       {
         "format": "MessagePack",
         "size_bytes": 34226,
-        "serialize_mean_us": 3.4281400025065523,
-        "serialize_std_us": 0.5636893592402222,
-        "deserialize_mean_us": 4.327899997224449,
-        "deserialize_std_us": 0.6083663466814673,
-        "total_mean_us": 7.756039999731001
+        "serialize_mean_us": 3.5573600002749117,
+        "serialize_std_us": 0.667864535905024,
+        "deserialize_mean_us": 4.35309999962783,
+        "deserialize_std_us": 0.8680121422837906,
+        "total_mean_us": 7.910459999902742
       },
       {
         "format": "Pickle",
         "size_bytes": 34272,
-        "serialize_mean_us": 3.1205400036924402,
-        "serialize_std_us": 0.7131183706543891,
-        "deserialize_mean_us": 4.5512399973631545,
-        "deserialize_std_us": 0.8015753067397291,
-        "total_mean_us": 7.671780001055595
+        "serialize_mean_us": 3.251100000329643,
+        "serialize_std_us": 1.1690081718800684,
+        "deserialize_mean_us": 4.6193200002448975,
+        "deserialize_std_us": 0.706930468915662,
+        "total_mean_us": 7.870420000574541
       }
     ]
   },
@@ -144,7 +144,7 @@
   },
   "energy_estimation": {
     "cpu_tdp_w": 65,
-    "per_request_wh": 1.1918112916767745e-05,
-    "million_requests_wh": 11.918112916767745
+    "per_request_wh": 1.276457649998856e-05,
+    "million_requests_wh": 12.76457649998856
   }
 }

@@ -53,6 +53,7 @@ def main():
         ("Caching Effectiveness", "caching_benchmark.py"),
         ("Scalability", "scalability_benchmark.py"),
         ("Energy Consumption", "energy_benchmark.py"),
+        ("Hierarchical Discovery (GHD)", "hierarchical_discovery_benchmark.py"),
     ]
     
     results = {}

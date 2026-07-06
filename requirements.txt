@@ -1,0 +1,10 @@
+# Dependencies for the MCP Green Computing benchmark suite.
+# Install with: pip install -r requirements.txt
+# On Windows, set PYTHONUTF8=1 before running to avoid console encoding errors.
+
+psutil>=5.9        # CPU/memory sampling for the energy benchmark
+tiktoken>=0.5      # exact cl100k_base token counting
+msgpack>=1.0       # binary serialisation comparison (what-if analysis)
+matplotlib>=3.6    # figure generation
+numpy>=1.24        # numerical support
+scikit-learn>=1.3  # HDBSCAN, TF-IDF, truncated SVD for the GHD benchmark

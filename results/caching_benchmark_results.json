@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-07-05 18:45:01",
+  "timestamp": "2026-07-06 11:58:38",
   "random_seed": 42,
   "repetitions_per_scenario": 5,
   "note": "Service latencies are simulated (sleep-based: DB 50ms, API 100ms, compute 75ms). The cache is EXACT-MATCH keyed on tool name + canonicalised arguments (not embedding-based semantic caching). Each scenario repeated; speedup/hit-rate reported as mean +/- std.",
@@ -11,40 +11,40 @@
       "repetitions": 5,
       "without_cache": {
         "total_requests": 100,
-        "total_time_ms": 7507.97170000078,
-        "mean_latency_ms": 75.0797170000078,
-        "median_latency_ms": 75.38869000009072,
-        "std_latency_ms": 19.984464673151603,
-        "p95_latency_ms": 100.63234000008379,
-        "p99_latency_ms": 100.87152000005517,
-        "min_latency_ms": 50.1283800001147,
-        "max_latency_ms": 100.87152000005517
+        "total_time_ms": 7505.877759999851,
+        "mean_latency_ms": 75.0587775999985,
+        "median_latency_ms": 75.37679999999227,
+        "std_latency_ms": 19.967561239298533,
+        "p95_latency_ms": 100.58709999999564,
+        "p99_latency_ms": 100.75262000000293,
+        "min_latency_ms": 50.09860000000117,
+        "max_latency_ms": 100.75262000000293
       },
       "with_cache": {
         "total_requests": 100,
-        "total_time_ms": 1501.8572200002382,
-        "mean_latency_ms": 15.018572200002382,
-        "median_latency_ms": 0.02003000004151545,
-        "std_latency_ms": 30.41145905208367,
-        "p95_latency_ms": 95.37293999983376,
-        "p99_latency_ms": 100.70966000002954,
-        "min_latency_ms": 0.006799999937356915,
-        "max_latency_ms": 100.70966000002954
+        "total_time_ms": 1501.6210400000546,
+        "mean_latency_ms": 15.016210400000546,
+        "median_latency_ms": 0.014730000003737587,
+        "std_latency_ms": 30.420015495002556,
+        "p95_latency_ms": 95.39888000000474,
+        "p99_latency_ms": 100.69151999999804,
+        "min_latency_ms": 0.0046600000018770515,
+        "max_latency_ms": 100.69151999999804
       },
       "cache_stats": {
         "hit_rate": 78.8,
         "hit_rate_std": 0.8366600265340756
       },
-      "speedup": 5.00410056280171,
-      "speedup_std": 0.23851022304941089,
+      "speedup": 5.003466198677629,
+      "speedup_std": 0.23516989535235844,
       "speedup_per_run": [
-        4.973431169218632,
-        4.700343439787956,
-        4.8884371150318415,
-        5.328319592371838,
-        5.1299714975982855
+        4.976630510954434,
+        4.702027307198223,
+        4.886879105437784,
+        5.318337435087256,
+        5.133456634710452
       ],
-      "time_reduction_percent": 79.9801502597065
+      "time_reduction_percent": 79.9785566153627
     },
     {
       "scenario": "Medium repetition (50% unique)",
@@ -53,40 +53,40 @@
       "repetitions": 5,
       "without_cache": {
         "total_requests": 100,
-        "total_time_ms": 7284.778919999735,
-        "mean_latency_ms": 72.84778919999735,
-        "median_latency_ms": 75.35055999996985,
-        "std_latency_ms": 19.908887944149754,
-        "p95_latency_ms": 100.56792000013957,
-        "p99_latency_ms": 100.75642000001608,
-        "min_latency_ms": 50.17987999999605,
-        "max_latency_ms": 100.75642000001608
+        "total_time_ms": 7284.993220000126,
+        "mean_latency_ms": 72.84993220000126,
+        "median_latency_ms": 75.37051999998994,
+        "std_latency_ms": 19.94704185371309,
+        "p95_latency_ms": 100.6125000000111,
+        "p99_latency_ms": 100.80769999999575,
+        "min_latency_ms": 50.12560000001258,
+        "max_latency_ms": 100.80769999999575
       },
       "with_cache": {
         "total_requests": 100,
-        "total_time_ms": 1406.498319999264,
-        "mean_latency_ms": 14.06498319999264,
-        "median_latency_ms": 0.017510000043330365,
-        "std_latency_ms": 29.884502724226948,
-        "p95_latency_ms": 95.36543999993228,
-        "p99_latency_ms": 100.73520000005374,
-        "min_latency_ms": 0.0064799998654052615,
-        "max_latency_ms": 100.73520000005374
+        "total_time_ms": 1406.0045199999763,
+        "mean_latency_ms": 14.060045199999763,
+        "median_latency_ms": 0.016709999994191094,
+        "std_latency_ms": 29.876850459969177,
+        "p95_latency_ms": 95.35313999999744,
+        "p99_latency_ms": 100.64373999998679,
+        "min_latency_ms": 0.0048600000013721,
+        "max_latency_ms": 100.64373999998679
       },
       "cache_stats": {
         "hit_rate": 80.4,
         "hit_rate_std": 0.8944271909999159
       },
-      "speedup": 5.189629963299257,
-      "speedup_std": 0.296217023944897,
+      "speedup": 5.191306145538715,
+      "speedup_std": 0.2930165900020532,
       "speedup_per_run": [
-        5.291370601691529,
-        5.19651167894406,
-        4.701197428234864,
-        5.501775303880093,
-        5.257294803745742
+        5.295553424883167,
+        5.186611590916663,
+        4.713558215609986,
+        5.5084398032205,
+        5.25236769306326
       ],
-      "time_reduction_percent": 80.67786184781677
+      "time_reduction_percent": 80.68548670315754
     },
     {
       "scenario": "High repetition (30% unique)",
@@ -95,40 +95,40 @@
       "repetitions": 5,
       "without_cache": {
         "total_requests": 100,
-        "total_time_ms": 7141.066880001017,
-        "mean_latency_ms": 71.41066880001017,
-        "median_latency_ms": 75.25101000010181,
-        "std_latency_ms": 19.88793480297846,
-        "p95_latency_ms": 100.58215999997628,
-        "p99_latency_ms": 100.76538000012079,
-        "min_latency_ms": 50.10381999991296,
-        "max_latency_ms": 100.76538000012079
+        "total_time_ms": 7143.572780000068,
+        "mean_latency_ms": 71.43572780000068,
+        "median_latency_ms": 75.30779999999595,
+        "std_latency_ms": 19.86963940617518,
+        "p95_latency_ms": 100.56613999997808,
+        "p99_latency_ms": 100.7244799999853,
+        "min_latency_ms": 50.16912000000957,
+        "max_latency_ms": 100.7244799999853
       },
       "with_cache": {
         "total_requests": 100,
-        "total_time_ms": 1235.0555400011217,
-        "mean_latency_ms": 12.350555400011217,
-        "median_latency_ms": 0.013129999979355489,
-        "std_latency_ms": 28.231618381711623,
-        "p95_latency_ms": 85.54846000006364,
-        "p99_latency_ms": 100.7221800001389,
-        "min_latency_ms": 0.008339999931195052,
-        "max_latency_ms": 100.7221800001389
+        "total_time_ms": 1234.1731399998707,
+        "mean_latency_ms": 12.341731399998707,
+        "median_latency_ms": 0.012810000004037647,
+        "std_latency_ms": 28.218016161479834,
+        "p95_latency_ms": 85.5592599999909,
+        "p99_latency_ms": 100.59625999999753,
+        "min_latency_ms": 0.004100000001017179,
+        "max_latency_ms": 100.59625999999753
       },
       "cache_stats": {
         "hit_rate": 82.6,
         "hit_rate_std": 1.51657508881031
       },
-      "speedup": 5.814125671430482,
-      "speedup_std": 0.5712959063696975,
+      "speedup": 5.819851022859161,
+      "speedup_std": 0.5706425380307182,
       "speedup_per_run": [
-        5.660442403807662,
-        6.639462683173236,
-        5.062109181495782,
-        5.727898116155831,
-        5.980715972519895
+        5.651320866885689,
+        6.646239680435152,
+        5.074839590191802,
+        5.736204954035044,
+        5.990650022748116
       ],
-      "time_reduction_percent": 82.6677295838372
+      "time_reduction_percent": 82.68561104199178
     },
     {
       "scenario": "Very high repetition (10% unique)",
@@ -137,68 +137,68 @@
       "repetitions": 5,
       "without_cache": {
         "total_requests": 100,
-        "total_time_ms": 6950.653920000241,
-        "mean_latency_ms": 69.50653920000241,
-        "median_latency_ms": 65.4819700000644,
-        "std_latency_ms": 18.05494682872107,
-        "p95_latency_ms": 95.56424000002153,
-        "p99_latency_ms": 95.85766000000149,
-        "min_latency_ms": 50.124179999966145,
-        "max_latency_ms": 95.85766000000149
+        "total_time_ms": 6953.799999999842,
+        "mean_latency_ms": 69.53799999999842,
+        "median_latency_ms": 65.52124999999478,
+        "std_latency_ms": 18.052536196838993,
+        "p95_latency_ms": 95.60408000000962,
+        "p99_latency_ms": 95.73133999998618,
+        "min_latency_ms": 50.144760000011956,
+        "max_latency_ms": 95.73133999998618
       },
       "with_cache": {
         "total_requests": 100,
-        "total_time_ms": 570.235679999314,
-        "mean_latency_ms": 5.70235679999314,
-        "median_latency_ms": 0.012000000106127118,
-        "std_latency_ms": 19.550369481758914,
-        "p95_latency_ms": 60.426439999992,
-        "p99_latency_ms": 95.43933999993897,
-        "min_latency_ms": 0.009360000058222795,
-        "max_latency_ms": 95.43933999993897
+        "total_time_ms": 569.6641,
+        "mean_latency_ms": 5.696641,
+        "median_latency_ms": 0.004199999989396019,
+        "std_latency_ms": 19.56549948715709,
+        "p95_latency_ms": 60.556960000008075,
+        "p99_latency_ms": 95.59725999999955,
+        "min_latency_ms": 0.00385999998115949,
+        "max_latency_ms": 95.59725999999955
       },
       "cache_stats": {
         "hit_rate": 91.6,
         "hit_rate_std": 1.51657508881031
       },
-      "speedup": 12.417697796856856,
-      "speedup_std": 2.5661080248502572,
+      "speedup": 12.431664904580499,
+      "speedup_std": 2.554887890618408,
       "speedup_per_run": [
-        12.412174663900501,
-        15.496448033783137,
-        9.937437489884408,
-        14.416144904159818,
-        9.82628389255642
+        12.417179162532454,
+        15.489380890637571,
+        9.976818937043776,
+        14.435363635562403,
+        9.839581897126292
       ],
-      "time_reduction_percent": 91.66277831625776
+      "time_reduction_percent": 91.67538095755168
     }
   ],
   "latency_distribution": {
     "requests": 500,
     "without_cache": {
-      "mean": 72.31322039999577,
-      "p50": 75.28309999997873,
-      "p95": 100.56859999986045,
-      "p99": 100.7727999999588
+      "mean": 72.34065000000282,
+      "p50": 75.34684999998831,
+      "p95": 100.6148999999823,
+      "p99": 100.74780000002193
     },
     "with_cache": {
-      "mean": 3.1226306000098702,
-      "p50": 0.004499999704421498,
-      "p95": 0.07409999989249627,
-      "p99": 100.26450000032128,
+      "mean": 3.1424390000011044,
+      "p50": 0.018300000078852463,
+      "p95": 0.09430000000065775,
+      "p99": 100.25789999997414,
       "cache_hit_rate": 95.6
     }
   },
   "energy_estimation": {
     "cpu_power_w": 65,
     "per_100_requests": {
-      "without_cache_j": 464.1693472000661,
-      "with_cache_j": 80.27861010007291,
-      "savings_percent": 82.70488764837131
+      "without_cache_j": 464.3322307000044,
+      "with_cache_j": 80.2212540999916,
+      "savings_percent": 82.7233069780545
     },
     "per_million_requests_wh": {
-      "without_cache": 1289.3592977779615,
-      "with_cache": 222.9961391668692
+      "without_cache": 1289.8117519444565,
+      "with_cache": 222.8368169444211
     }
   }
 }

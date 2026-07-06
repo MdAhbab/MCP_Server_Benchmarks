@@ -1,0 +1,17 @@
+\begin{table}[!t]
+\centering
+\caption{Discovery Policies over 1,120 Entities (Mean $\pm$ SD, Five Seeded Runs)}
+\label{tab:ghd_benchmark}
+\resizebox{\columnwidth}{!}{%
+\begin{tabular}{lrrr}
+\toprule
+\textbf{Policy} & \textbf{Tokens/query} & \textbf{Recall (\%)} & \textbf{Wh/10\textsuperscript{6} queries} \\
+\midrule
+Flat (all definitions) & 135,462 $\pm$ 668 & 100.0 $\pm$ 0.0 & 13,546,240 \\
+Top-5 retrieval & 650 $\pm$ 8 & 28.5 $\pm$ 9.0 & 65,047 \\
+Budget-matched retrieval & 4,493 $\pm$ 166 & 66.7 $\pm$ 4.1 & 449,271 \\
+GHD without graph edges & 4,525 $\pm$ 165 & 63.6 $\pm$ 3.6 & 452,461 \\
+GHD (proposed) & 4,524 $\pm$ 164 & 64.8 $\pm$ 3.3 & 452,421 \\
+\bottomrule
+\end{tabular}}
+\end{table}
