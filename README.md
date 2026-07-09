@@ -1655,7 +1655,7 @@ This section documents the full revision of the paper (`main.tex`) and this benc
 6. **Internal inconsistency: "10,000 requests per day" in the paper vs. 480,000 in the results JSON.** The paper now states the scenario assumptions once (480,000 requests/day at 100 req/s) next to the numbers derived from them.
 7. **Misattribution: "Skywork AI" credited for MCP-Solver.** MCP-Solver is by Szeider (arXiv:2501.00539). Removed.
 8. **Success-rate misreading.** "43.72% success ... more than half of all tool calls fail" conflated task-level and call-level failure. Corrected to task-level phrasing.
-9. **Stale figure captions.** All captions now match the regenerated figures and current data (energy figure: 4.88 Wh vs 0.06 Wh; caching: 12.4x; dashboard totals updated), and literature-derived illustrative charts (Images/Chart 1-4) are explicitly labelled as illustrative or literature-synthesised in their captions.
+9. **Stale figure captions.** All captions now match the regenerated figures and current data (energy figure: 4.87 Wh vs 0.06 Wh; caching: 12.4x; dashboard totals updated), and literature-derived illustrative charts (Images/Chart 1-4) are explicitly labelled as illustrative or literature-synthesised in their captions.
 10. **Mixing measured and modelled quantities.** The reviewer's underlying concern in 3.2 is fully addressed structurally: every energy number in the paper is now tagged as either a *measurement* (utilisation-model, process-attributed, with SD) or a *scenario analysis / extrapolation* (the 98.7% payload-reduction scenario), and the production estimate states its assumptions inline.
 
 ## B. Changes to This Benchmark Suite (code)
@@ -1676,8 +1676,8 @@ This section documents the full revision of the paper (`main.tex`) and this benc
 | Caching speedup (low repetition) | 4.7x | 5.0 +/- 0.2x |
 | Tool-definition tokens @ 100 servers | 156,075 (chars/4) | 142,202 (tiktoken, exact) |
 | Context usage @ 25 servers (GPT-4) | 30.4% | 27.8% |
-| Idle vs. mixed workload power | 26.4 W vs 22.6 W (anomaly) | 0.00 W vs 0.53 W attributed (correct ordering) |
-| Serialization (large, JSON vs MsgPack) | 663 vs 444 us | 660 vs 445 us (stable) |
+| Idle vs. mixed workload power | 26.4 W vs 22.6 W (anomaly) | 0.00 W vs 0.43 W attributed (correct ordering) |
+| Serialization (large, JSON vs MsgPack) | 663 vs 444 us | 707 vs 464 us (stable) |
 | Annual energy saving scenario | 12.63 kWh/node | 1.76 kWh/node (attributed basis, assumptions stated) |
 
 The old caching and energy numbers were not wrong so much as unreproducible and, in the energy case, artifact-laden; the new numbers are smaller but defensible, seeded, and carry uncertainty estimates. The paper reports only the new numbers.
@@ -1782,7 +1782,7 @@ Novelty claim (honest): GHD is the first discovery layer to combine (a) density-
 
 - **Experiment A (semantic recall).** GHD (64.8%) is statistically indistinguishable from budget-matched flat retrieval (66.7%) at equal token budget, and both crush top-5 retrieval (28.5%). GHD does NOT beat flat retrieval on pure semantics, and the paper says so explicitly. Parity is the honest and expected result.
 - **Experiment B (operational-constraint routing).** GHD selects the constraint-correct tool (cheapest by latency/energy among functional equivalents) as its top result 46.3% of the time vs 23.6% for semantic retrieval, which ranks by text alone and cannot see operational cost. GHD nearly doubles the correct-selection rate. This is the genuine multi-feature payoff.
-- **Experiment C (synchronisation).** Incremental insert ~0.6 ms vs full re-cluster ~0.24 s, so incremental maintenance is over 300x cheaper. A new tool routes correctly ~54% of the time before periodic repair.
+- **Experiment C (synchronisation).** Incremental insert ~0.6 ms vs full re-cluster ~0.20 s, so incremental maintenance is over 300x cheaper. A new tool routes correctly ~54% of the time before periodic repair.
 - **Ablation.** Graph edges add a small consistent recall gain (63.6% -> 64.8%).
 
 ## Honesty notes / how the design was hardened
