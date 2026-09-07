@@ -1,0 +1,6 @@
+# MCP-tools dataset extracted from the MCP-Zero release (333 MB source file).
+# Rebuild with: python mcp_zero_catalogue.py <downloaded.json>
+data/mcp_tools_catalogue.json
+data/mcp_tools_embeddings.npy
+__pycache__/
+*.pyc

@@ -27,6 +27,10 @@ Baselines:
   - RET-5: top-5 semantic retrieval per query (RAG-MCP style flat retrieval).
   - RET-B: budget-matched retrieval (top-K with K chosen so the token budget
     matches GHD), the fair equal-budget comparison.
+  - RET-OP: budget-matched retrieval whose candidates are then re-ranked by the
+    requested operational axis, using the same functional band and cheapest-first
+    rule GHD applies. This baseline is given exactly the operational metadata GHD
+    indexes, so the constraint-routing comparison is not decided by metadata access.
   - GHD-NG: GHD without graph edges (ablation for the lateral links).
 
 Metrics: context tokens per query, recall of the target entity within the
@@ -519,15 +523,35 @@ def evaluate_rep(seed: int) -> dict:
     con_targets, con_queries, con_prefs = make_constraint_queries(
         rng, entities, groups, N_CONSTRAINT_QUERIES)
     con_q_vecs = pipeline.embed_queries(con_queries)
-    con = {"RET_top1": 0, "RET_cover": 0, "GHD_top1": 0, "GHD_cover": 0, "n": N_CONSTRAINT_QUERIES}
+    con = {"RET_top1": 0, "RET_cover": 0, "RETOP_top1": 0, "RETOP_cover": 0,
+           "GHD_top1": 0, "GHD_cover": 0, "n": N_CONSTRAINT_QUERIES}
     for i, t in enumerate(con_targets):
         qv = con_q_vecs[i]
         axis = con_prefs[i]
         sims = text_vecs @ qv
-        # Semantic retrieval (RAG-MCP style): rank by text similarity only.
+        op_all = np.array([e["latency_ms"] if axis == "latency" else e["energy_score"]
+                           for e in entities])
+        # RET-B (RAG-MCP style): rank by text similarity only. This baseline has
+        # no operational metadata, so it cannot act on the stated preference.
         topb = list(np.argsort(-sims)[:k_budget])
         con["RET_cover"] += int(t in topb)
         con["RET_top1"] += int(len(topb) > 0 and topb[0] == t)
+        # RET-OP: the same retrieval pool, then re-ranked by the requested
+        # operational axis using the same functional band and the same
+        # cheapest-first rule GHD applies. This baseline sees exactly the
+        # operational metadata GHD sees, so any remaining gap is attributable to
+        # the candidate pool the hierarchy produces, not to metadata access.
+        if topb:
+            cand = np.array(topb)
+            cs = sims[cand]
+            functional = cand[cs >= cs.max() - CONSTRAINT_MARGIN]
+            functional = functional[np.argsort(op_all[functional])]
+            rest = [j for j in cand if j not in set(functional.tolist())]
+            order_op = list(functional) + rest
+        else:
+            order_op = []
+        con["RETOP_cover"] += int(t in order_op)
+        con["RETOP_top1"] += int(len(order_op) > 0 and order_op[0] == t)
         # GHD with an explicit operational preference passed by the agent.
         exposed, _ = hierarchy.discover(qv, use_graph=True, op_pref=(axis, 1.0))
         con["GHD_cover"] += int(t in exposed)
@@ -589,6 +613,8 @@ def evaluate_rep(seed: int) -> dict:
             "n": con["n"],
             "ret_top1_recall": con["RET_top1"] / con["n"],
             "ret_coverage": con["RET_cover"] / con["n"],
+            "retop_top1_recall": con["RETOP_top1"] / con["n"],
+            "retop_coverage": con["RETOP_cover"] / con["n"],
             "ghd_top1_recall": con["GHD_top1"] / con["n"],
             "ghd_coverage": con["GHD_cover"] / con["n"],
         },
@@ -632,7 +658,8 @@ def aggregate(reps):
         agg["sync"][key + "_mean"] = statistics.mean(vals)
         agg["sync"][key + "_std"] = statistics.stdev(vals)
     agg["constraint"] = {}
-    for key in ["ret_top1_recall", "ret_coverage", "ghd_top1_recall", "ghd_coverage"]:
+    for key in ["ret_top1_recall", "ret_coverage", "retop_top1_recall",
+                "retop_coverage", "ghd_top1_recall", "ghd_coverage"]:
         vals = [r["constraint"][key] for r in reps]
         agg["constraint"][key + "_mean"] = statistics.mean(vals)
         agg["constraint"][key + "_std"] = statistics.stdev(vals)

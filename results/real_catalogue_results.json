@@ -1,0 +1,375 @@
+{
+  "dataset": "MCP-tools (MCP-Zero, arXiv:2506.01056)",
+  "n_tools": 2797,
+  "n_servers": 293,
+  "seeds": [
+    42,
+    43,
+    44,
+    45,
+    46
+  ],
+  "repetitions": [
+    {
+      "seed": 42,
+      "n_entities": 2797,
+      "n_clusters": 89,
+      "summary_tokens": 3077,
+      "flat_tokens": 118684,
+      "k_budget_matched": 94,
+      "policies": {
+        "FLAT": {
+          "mean_tokens": 118684,
+          "marginal_tokens": 118684,
+          "recall": 1.0,
+          "token_reduction_vs_flat_percent": 0.0,
+          "energy_wh_per_million_queries": 11868400.000000002
+        },
+        "RET-5": {
+          "mean_tokens": 255.13666666666666,
+          "marginal_tokens": 255.13666666666666,
+          "recall": 0.7933333333333333,
+          "token_reduction_vs_flat_percent": 99.78502859132936,
+          "energy_wh_per_million_queries": 25513.666666666668
+        },
+        "RET-B": {
+          "mean_tokens": 4014.8033333333333,
+          "marginal_tokens": 4014.8033333333333,
+          "recall": 1.0,
+          "token_reduction_vs_flat_percent": 96.61723287609675,
+          "energy_wh_per_million_queries": 401480.3333333333
+        },
+        "GHD": {
+          "mean_tokens": 4035.1266666666666,
+          "marginal_tokens": 958.1266666666666,
+          "recall": 0.84,
+          "token_reduction_vs_flat_percent": 96.60010897284667,
+          "energy_wh_per_million_queries": 403512.6666666667
+        },
+        "GHD-NG": {
+          "mean_tokens": 4035.59,
+          "marginal_tokens": 958.5900000000001,
+          "recall": 0.84,
+          "token_reduction_vs_flat_percent": 96.59971858043207,
+          "energy_wh_per_million_queries": 403559.00000000006
+        }
+      },
+      "constraint": {
+        "ret_top1_recall": 0.25,
+        "ret_coverage": 0.885,
+        "retop_top1_recall": 0.52,
+        "retop_coverage": 0.885,
+        "ghd_top1_recall": 0.52,
+        "ghd_coverage": 0.795,
+        "n": 200
+      },
+      "retb_at_ghd_marginal_budget": {
+        "k": 22,
+        "recall": 0.8933333333333333
+      },
+      "mean_def_tokens": 42.41830532713622
+    },
+    {
+      "seed": 43,
+      "n_entities": 2797,
+      "n_clusters": 91,
+      "summary_tokens": 3146,
+      "flat_tokens": 118684,
+      "k_budget_matched": 94,
+      "policies": {
+        "FLAT": {
+          "mean_tokens": 118684,
+          "marginal_tokens": 118684,
+          "recall": 1.0,
+          "token_reduction_vs_flat_percent": 0.0,
+          "energy_wh_per_million_queries": 11868400.000000002
+        },
+        "RET-5": {
+          "mean_tokens": 246.07666666666665,
+          "marginal_tokens": 246.07666666666665,
+          "recall": 0.76,
+          "token_reduction_vs_flat_percent": 99.7926623077528,
+          "energy_wh_per_million_queries": 24607.666666666668
+        },
+        "RET-B": {
+          "mean_tokens": 3960.82,
+          "marginal_tokens": 3960.82,
+          "recall": 1.0,
+          "token_reduction_vs_flat_percent": 96.66271780526439,
+          "energy_wh_per_million_queries": 396082.00000000006
+        },
+        "GHD": {
+          "mean_tokens": 4088.653333333333,
+          "marginal_tokens": 942.6533333333332,
+          "recall": 0.9033333333333333,
+          "token_reduction_vs_flat_percent": 96.55500881893656,
+          "energy_wh_per_million_queries": 408865.3333333334
+        },
+        "GHD-NG": {
+          "mean_tokens": 4083.7066666666665,
+          "marginal_tokens": 937.7066666666665,
+          "recall": 0.9033333333333333,
+          "token_reduction_vs_flat_percent": 96.55917674946356,
+          "energy_wh_per_million_queries": 408370.6666666667
+        }
+      },
+      "constraint": {
+        "ret_top1_recall": 0.36,
+        "ret_coverage": 0.9,
+        "retop_top1_recall": 0.54,
+        "retop_coverage": 0.9,
+        "ghd_top1_recall": 0.54,
+        "ghd_coverage": 0.8,
+        "n": 200
+      },
+      "retb_at_ghd_marginal_budget": {
+        "k": 22,
+        "recall": 0.9466666666666667
+      },
+      "mean_def_tokens": 42.41830532713622
+    },
+    {
+      "seed": 44,
+      "n_entities": 2797,
+      "n_clusters": 91,
+      "summary_tokens": 3146,
+      "flat_tokens": 118684,
+      "k_budget_matched": 98,
+      "policies": {
+        "FLAT": {
+          "mean_tokens": 118684,
+          "marginal_tokens": 118684,
+          "recall": 1.0,
+          "token_reduction_vs_flat_percent": 0.0,
+          "energy_wh_per_million_queries": 11868400.000000002
+        },
+        "RET-5": {
+          "mean_tokens": 282.41,
+          "marginal_tokens": 282.41,
+          "recall": 0.8233333333333334,
+          "token_reduction_vs_flat_percent": 99.7620488018604,
+          "energy_wh_per_million_queries": 28241.000000000004
+        },
+        "RET-B": {
+          "mean_tokens": 4438.973333333333,
+          "marginal_tokens": 4438.973333333333,
+          "recall": 0.9933333333333333,
+          "token_reduction_vs_flat_percent": 96.25983845056341,
+          "energy_wh_per_million_queries": 443897.3333333334
+        },
+        "GHD": {
+          "mean_tokens": 4182.823333333334,
+          "marginal_tokens": 1036.8233333333337,
+          "recall": 0.8633333333333333,
+          "token_reduction_vs_flat_percent": 96.47566366710481,
+          "energy_wh_per_million_queries": 418282.3333333334
+        },
+        "GHD-NG": {
+          "mean_tokens": 4183.2,
+          "marginal_tokens": 1037.1999999999998,
+          "recall": 0.8633333333333333,
+          "token_reduction_vs_flat_percent": 96.47534629773179,
+          "energy_wh_per_million_queries": 418320.0
+        }
+      },
+      "constraint": {
+        "ret_top1_recall": 0.285,
+        "ret_coverage": 0.935,
+        "retop_top1_recall": 0.315,
+        "retop_coverage": 0.935,
+        "ghd_top1_recall": 0.315,
+        "ghd_coverage": 0.765,
+        "n": 200
+      },
+      "retb_at_ghd_marginal_budget": {
+        "k": 24,
+        "recall": 0.94
+      },
+      "mean_def_tokens": 42.41830532713622
+    },
+    {
+      "seed": 45,
+      "n_entities": 2797,
+      "n_clusters": 89,
+      "summary_tokens": 3077,
+      "flat_tokens": 118684,
+      "k_budget_matched": 93,
+      "policies": {
+        "FLAT": {
+          "mean_tokens": 118684,
+          "marginal_tokens": 118684,
+          "recall": 1.0,
+          "token_reduction_vs_flat_percent": 0.0,
+          "energy_wh_per_million_queries": 11868400.000000002
+        },
+        "RET-5": {
+          "mean_tokens": 234.31666666666666,
+          "marginal_tokens": 234.31666666666666,
+          "recall": 0.8466666666666667,
+          "token_reduction_vs_flat_percent": 99.80257097277926,
+          "energy_wh_per_million_queries": 23431.666666666668
+        },
+        "RET-B": {
+          "mean_tokens": 3907.01,
+          "marginal_tokens": 3907.01,
+          "recall": 0.9833333333333333,
+          "token_reduction_vs_flat_percent": 96.7080566883489,
+          "energy_wh_per_million_queries": 390701.0
+        },
+        "GHD": {
+          "mean_tokens": 3998.7933333333335,
+          "marginal_tokens": 921.7933333333335,
+          "recall": 0.7833333333333333,
+          "token_reduction_vs_flat_percent": 96.63072247873906,
+          "energy_wh_per_million_queries": 399879.3333333334
+        },
+        "GHD-NG": {
+          "mean_tokens": 3999.3866666666668,
+          "marginal_tokens": 922.3866666666668,
+          "recall": 0.7833333333333333,
+          "token_reduction_vs_flat_percent": 96.6302225517621,
+          "energy_wh_per_million_queries": 399938.66666666674
+        }
+      },
+      "constraint": {
+        "ret_top1_recall": 0.175,
+        "ret_coverage": 0.9,
+        "retop_top1_recall": 0.375,
+        "retop_coverage": 0.9,
+        "ghd_top1_recall": 0.325,
+        "ghd_coverage": 0.675,
+        "n": 200
+      },
+      "retb_at_ghd_marginal_budget": {
+        "k": 21,
+        "recall": 0.91
+      },
+      "mean_def_tokens": 42.41830532713622
+    },
+    {
+      "seed": 46,
+      "n_entities": 2797,
+      "n_clusters": 92,
+      "summary_tokens": 3178,
+      "flat_tokens": 118684,
+      "k_budget_matched": 95,
+      "policies": {
+        "FLAT": {
+          "mean_tokens": 118684,
+          "marginal_tokens": 118684,
+          "recall": 1.0,
+          "token_reduction_vs_flat_percent": 0.0,
+          "energy_wh_per_million_queries": 11868400.000000002
+        },
+        "RET-5": {
+          "mean_tokens": 233.09666666666666,
+          "marginal_tokens": 233.09666666666666,
+          "recall": 0.8733333333333333,
+          "token_reduction_vs_flat_percent": 99.8035989125184,
+          "energy_wh_per_million_queries": 23309.666666666664
+        },
+        "RET-B": {
+          "mean_tokens": 3925.096666666667,
+          "marginal_tokens": 3925.096666666667,
+          "recall": 0.9933333333333333,
+          "token_reduction_vs_flat_percent": 96.69281734128722,
+          "energy_wh_per_million_queries": 392509.6666666667
+        },
+        "GHD": {
+          "mean_tokens": 4086.366666666667,
+          "marginal_tokens": 908.3666666666668,
+          "recall": 0.9033333333333333,
+          "token_reduction_vs_flat_percent": 96.55693550380282,
+          "energy_wh_per_million_queries": 408636.6666666667
+        },
+        "GHD-NG": {
+          "mean_tokens": 4090.193333333333,
+          "marginal_tokens": 912.1933333333332,
+          "recall": 0.8566666666666667,
+          "token_reduction_vs_flat_percent": 96.55371125565928,
+          "energy_wh_per_million_queries": 409019.3333333334
+        }
+      },
+      "constraint": {
+        "ret_top1_recall": 0.275,
+        "ret_coverage": 0.915,
+        "retop_top1_recall": 0.52,
+        "retop_coverage": 0.915,
+        "ghd_top1_recall": 0.52,
+        "ghd_coverage": 0.76,
+        "n": 200
+      },
+      "retb_at_ghd_marginal_budget": {
+        "k": 21,
+        "recall": 0.9333333333333333
+      },
+      "mean_def_tokens": 42.41830532713622
+    }
+  ],
+  "policies": {
+    "FLAT": {
+      "mean_tokens": 118684,
+      "std_tokens": 0.0,
+      "recall_mean": 1.0,
+      "recall_std": 0.0,
+      "token_reduction_vs_flat_percent": 0.0,
+      "energy_wh_per_million_queries": 11868400.000000002
+    },
+    "RET-5": {
+      "mean_tokens": 250.20733333333334,
+      "std_tokens": 20.147336520962003,
+      "recall_mean": 0.8193333333333334,
+      "recall_std": 0.044372163446116615,
+      "token_reduction_vs_flat_percent": 99.78918191724804,
+      "energy_wh_per_million_queries": 25020.733333333334
+    },
+    "RET-B": {
+      "mean_tokens": 4049.340666666667,
+      "std_tokens": 221.6624353405671,
+      "recall_mean": 0.994,
+      "recall_std": 0.006831300510639755,
+      "token_reduction_vs_flat_percent": 96.58813263231214,
+      "energy_wh_per_million_queries": 404934.0666666667
+    },
+    "GHD": {
+      "mean_tokens": 4078.3526666666667,
+      "std_tokens": 69.43094180550928,
+      "recall_mean": 0.8586666666666667,
+      "recall_std": 0.05008881001669823,
+      "token_reduction_vs_flat_percent": 96.56368788828598,
+      "energy_wh_per_million_queries": 407835.2666666667
+    },
+    "GHD-NG": {
+      "mean_tokens": 4078.4153333333334,
+      "std_tokens": 69.32907974131605,
+      "recall_mean": 0.8493333333333333,
+      "recall_std": 0.043614472623456337,
+      "token_reduction_vs_flat_percent": 96.56363508700976,
+      "energy_wh_per_million_queries": 407841.5333333334
+    }
+  },
+  "constraint": {
+    "ret_top1_recall_mean": 0.269,
+    "ret_top1_recall_std": 0.06665208173793223,
+    "ret_coverage_mean": 0.907,
+    "ret_coverage_std": 0.018907670401189052,
+    "retop_top1_recall_mean": 0.454,
+    "retop_top1_recall_std": 0.10206615501722402,
+    "retop_coverage_mean": 0.907,
+    "retop_coverage_std": 0.018907670401189052,
+    "ghd_top1_recall_mean": 0.444,
+    "ghd_top1_recall_std": 0.11354514520665339,
+    "ghd_coverage_mean": 0.759,
+    "ghd_coverage_std": 0.050174694817208404
+  },
+  "retb_at_ghd_marginal_budget": {
+    "k_mean": 22,
+    "recall_mean": 0.9246666666666666,
+    "recall_std": 0.022310934040908673
+  },
+  "summary_tokens_mean": 3124.8,
+  "n_groups": 19,
+  "n_grouped_tools": 60,
+  "flat_tokens_mean": 118684,
+  "n_clusters_mean": 90.4
+}
