@@ -12,11 +12,15 @@ the discovery policies on them.
   E5  the EATS ablation on the natural queries, converted to joules per query
       using the measured prefill cost per token from E2
 
-    python gpu_followups.py
+    python gpu_followups.py [results-dir]
+
+The directory defaults to results/gpu. run.py passes a per-model
+subdirectory, since each model produces its own queries.
 """
 
 import json
 import statistics
+import sys
 from pathlib import Path
 
 import numpy as np
@@ -25,7 +29,7 @@ import real_catalogue_benchmark as R
 from eats_selection import EATSSelector, LearnedReranker, build_training_set
 from hierarchical_discovery_benchmark import CONTEXT_OVERHEAD_TOKENS
 
-GPU = Path("results/gpu")
+GPU = Path(sys.argv[1]) if len(sys.argv) > 1 else Path("results/gpu")
 DATA = Path("data")
 SEED = 42
 

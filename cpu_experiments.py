@@ -128,7 +128,11 @@ def e8(catalogue, sample: int = 400, seed: int = 42) -> dict:
             counters[enc] = lambda t, e=e: len(e.encode(t))
     except Exception as ex:
         print(f"  tiktoken unavailable: {ex}")
-    for hf in ("Qwen/Qwen2.5-3B-Instruct", "BAAI/bge-small-en-v1.5"):
+    # Qwen2.5 and Qwen3.5 are both included because the vocabulary grew
+    # sharply between them, from 151,936 to 248,320, and a larger vocabulary
+    # is the one change that could move token counts on its own.
+    for hf in ("Qwen/Qwen2.5-3B-Instruct", "Qwen/Qwen3.5-4B",
+               "BAAI/bge-small-en-v1.5"):
         try:
             from transformers import AutoTokenizer
             tk = AutoTokenizer.from_pretrained(hf)

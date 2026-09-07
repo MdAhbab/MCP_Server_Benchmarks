@@ -79,6 +79,11 @@
         "mean_per_definition": 40.06,
         "ratio_to_cl100k_base": 1.0026
       },
+      "Qwen/Qwen3.5-4B": {
+        "total": 16011,
+        "mean_per_definition": 40.03,
+        "ratio_to_cl100k_base": 1.0017
+      },
       "BAAI/bge-small-en-v1.5": {
         "total": 22408,
         "mean_per_definition": 56.02,
@@ -96,12 +101,14 @@
         "cl100k_base": 0.8569,
         "o200k_base": 0.5895,
         "Qwen/Qwen2.5-3B-Instruct": 0.5552,
+        "Qwen/Qwen3.5-4B": 0.4605,
         "BAAI/bge-small-en-v1.5": 0.913
       },
       "tokens_per_character_english": {
         "cl100k_base": 0.1947,
         "o200k_base": 0.1931,
         "Qwen/Qwen2.5-3B-Instruct": 0.1948,
+        "Qwen/Qwen3.5-4B": 0.1945,
         "BAAI/bge-small-en-v1.5": 0.2637
       },
       "note": "only 3 CJK descriptions exist in the registry, so the per-character figures are indicative rather than a population estimate"
