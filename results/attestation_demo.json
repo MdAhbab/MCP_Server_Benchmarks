@@ -1,0 +1,74 @@
+{
+  "schema": "mcp-operational-attestation/v1",
+  "records": [
+    {
+      "record": {
+        "conditions": {
+          "concurrency": 1,
+          "energy_instrument": "none",
+          "hardware": "Intel64 Family 6 Model 165 Stepping 5, GenuineIntel",
+          "harness": "attestation.py demo",
+          "notes": "",
+          "platform": "Windows-11-10.0.26200-SP0",
+          "samples": 25,
+          "timestamp_utc": "2026-09-07T13:47:39Z"
+        },
+        "energy_j_per_call": null,
+        "latency_ms_p50": 5.154,
+        "latency_ms_p95": 6.433,
+        "latency_ms_p99": 6.501,
+        "schema": "mcp-operational-attestation/v1",
+        "server": "demo-server",
+        "tool": "fast.search"
+      },
+      "digest_sha256": "1d1ddba16907c4bd058052c393b2b54668572e2fc3d055d4cb8276361814bc5c",
+      "signature_b64": "z7b+y/oPPt+++Dpr42mD9ZHhXG8kyPH3OxH2ttDEEUbbG1S2b5tT3cvMi6GR+5Ke07XjIjbmIZM2BUcChnuoCw==",
+      "public_key_b64": "jphRLKCEfN7mXiyJmqM4uARuDhspuZumWiDUUc1MhQY=",
+      "algorithm": "ed25519",
+      "schema": "mcp-operational-attestation/v1"
+    },
+    {
+      "record": {
+        "conditions": {
+          "concurrency": 1,
+          "energy_instrument": "none",
+          "hardware": "Intel64 Family 6 Model 165 Stepping 5, GenuineIntel",
+          "harness": "attestation.py demo",
+          "notes": "",
+          "platform": "Windows-11-10.0.26200-SP0",
+          "samples": 25,
+          "timestamp_utc": "2026-09-07T13:47:40Z"
+        },
+        "energy_j_per_call": null,
+        "latency_ms_p50": 24.132,
+        "latency_ms_p95": 27.527,
+        "latency_ms_p99": 28.584,
+        "schema": "mcp-operational-attestation/v1",
+        "server": "demo-server",
+        "tool": "slow.search"
+      },
+      "digest_sha256": "95fd82d66c17ddd66c1ec7cb0ad45f08b2f5f254d1f8637e4bd42ecae428f941",
+      "signature_b64": "FUjbdOweH/r7+0v3SZTMPuf8RGfCmzuh9qYwufUYCvCfWlb1wHg05KPROqViAR9RKdtdxSSJDP/XzxeULYmVCA==",
+      "public_key_b64": "jphRLKCEfN7mXiyJmqM4uARuDhspuZumWiDUUc1MhQY=",
+      "algorithm": "ed25519",
+      "schema": "mcp-operational-attestation/v1"
+    }
+  ],
+  "verification": [
+    {
+      "tool": "fast.search",
+      "valid": true,
+      "reason": "signature valid for this record and key"
+    },
+    {
+      "tool": "slow.search",
+      "valid": true,
+      "reason": "signature valid for this record and key"
+    }
+  ],
+  "forgery_check": {
+    "attempt": "rewrote latency_ms_p50 on a signed record",
+    "accepted": false,
+    "reason": "record does not match its digest: it was altered after signing"
+  }
+}

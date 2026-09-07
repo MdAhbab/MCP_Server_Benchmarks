@@ -1,0 +1,205 @@
+{
+  "e6_real_network_caching": {
+    "endpoints_live": [
+      "https://httpbin.org/uuid",
+      "https://api.github.com/zen",
+      "https://dog.ceo/api/breeds/list/all",
+      "https://catfact.ninja/fact"
+    ],
+    "endpoints_tried": [
+      "https://httpbin.org/uuid",
+      "https://api.github.com/zen",
+      "https://dog.ceo/api/breeds/list/all",
+      "https://catfact.ninja/fact",
+      "https://worldtimeapi.org/api/timezone/Etc/UTC"
+    ],
+    "n_requests": 120,
+    "scenarios": {
+      "low repetition": {
+        "unique_fraction": 0.8,
+        "no_cache_total_ms": 63353.9,
+        "cached_total_ms": 62642.2,
+        "hit_rate": 0.03333333333333333,
+        "speedup": 1.01,
+        "no_cache_p50_ms": 368.55,
+        "cached_p50_ms": 363.76,
+        "no_cache_p95_ms": 1083.37,
+        "cached_p95_ms": 1195.52
+      },
+      "medium repetition": {
+        "unique_fraction": 0.5,
+        "no_cache_total_ms": 60524.7,
+        "cached_total_ms": 59720.1,
+        "hit_rate": 0.11666666666666667,
+        "speedup": 1.01,
+        "no_cache_p50_ms": 343.59,
+        "cached_p50_ms": 327.8,
+        "no_cache_p95_ms": 1088.94,
+        "cached_p95_ms": 1208.96
+      },
+      "high repetition": {
+        "unique_fraction": 0.2,
+        "no_cache_total_ms": 64307.5,
+        "cached_total_ms": 45286.1,
+        "hit_rate": 0.38333333333333336,
+        "speedup": 1.42,
+        "no_cache_p50_ms": 354.3,
+        "cached_p50_ms": 183.11,
+        "no_cache_p95_ms": 1166.28,
+        "cached_p95_ms": 1159.41
+      },
+      "very high repetition": {
+        "unique_fraction": 0.05,
+        "no_cache_total_ms": 79477.2,
+        "cached_total_ms": 15308.1,
+        "hit_rate": 0.8,
+        "speedup": 5.19,
+        "no_cache_p50_ms": 230.2,
+        "cached_p50_ms": 0.0,
+        "no_cache_p95_ms": 1931.32,
+        "cached_p95_ms": 987.3
+      }
+    }
+  },
+  "e8_tokenizer_sensitivity": {
+    "n_definitions": 400,
+    "tokenizers": {
+      "cl100k_base": {
+        "total": 15984,
+        "mean_per_definition": 39.96,
+        "ratio_to_cl100k_base": 1.0
+      },
+      "o200k_base": {
+        "total": 15982,
+        "mean_per_definition": 39.95,
+        "ratio_to_cl100k_base": 0.9999
+      },
+      "Qwen/Qwen2.5-3B-Instruct": {
+        "total": 16025,
+        "mean_per_definition": 40.06,
+        "ratio_to_cl100k_base": 1.0026
+      },
+      "BAAI/bge-small-en-v1.5": {
+        "total": 22408,
+        "mean_per_definition": 56.02,
+        "ratio_to_cl100k_base": 1.4019
+      }
+    },
+    "baseline": "cl100k_base",
+    "max_disagreement_percent": 40.21,
+    "multilingual": {
+      "catalogue_size": 2797,
+      "non_ascii_descriptions": 6,
+      "cjk_descriptions": 3,
+      "ascii_share_percent": 99.785,
+      "tokens_per_character_cjk": {
+        "cl100k_base": 0.8569,
+        "o200k_base": 0.5895,
+        "Qwen/Qwen2.5-3B-Instruct": 0.5552,
+        "BAAI/bge-small-en-v1.5": 0.913
+      },
+      "tokens_per_character_english": {
+        "cl100k_base": 0.1947,
+        "o200k_base": 0.1931,
+        "Qwen/Qwen2.5-3B-Instruct": 0.1948,
+        "BAAI/bge-small-en-v1.5": 0.2637
+      },
+      "note": "only 3 CJK descriptions exist in the registry, so the per-character figures are indicative rather than a population estimate"
+    }
+  },
+  "e9_disclosure_overhead": {
+    "reps": 40,
+    "rows": [
+      {
+        "catalogue_size": 5,
+        "verbose_tokens": 184,
+        "progressive_tokens": 184,
+        "tokens_saved": 0,
+        "verbose_serialise_ms": 0.0094,
+        "progressive_lexical_ms": 0.0148,
+        "progressive_embedding_ms": 19.7966,
+        "extra_server_ms_lexical": 0.0053,
+        "extra_server_ms_embedding": 19.7872
+      },
+      {
+        "catalogue_size": 10,
+        "verbose_tokens": 331,
+        "progressive_tokens": 191,
+        "tokens_saved": 140,
+        "verbose_serialise_ms": 0.0171,
+        "progressive_lexical_ms": 0.02,
+        "progressive_embedding_ms": 13.887,
+        "extra_server_ms_lexical": 0.0029,
+        "extra_server_ms_embedding": 13.8699
+      },
+      {
+        "catalogue_size": 25,
+        "verbose_tokens": 1014,
+        "progressive_tokens": 223,
+        "tokens_saved": 791,
+        "verbose_serialise_ms": 0.0371,
+        "progressive_lexical_ms": 0.0482,
+        "progressive_embedding_ms": 12.7719,
+        "extra_server_ms_lexical": 0.0112,
+        "extra_server_ms_embedding": 12.7348
+      },
+      {
+        "catalogue_size": 50,
+        "verbose_tokens": 2317,
+        "progressive_tokens": 381,
+        "tokens_saved": 1936,
+        "verbose_serialise_ms": 0.0774,
+        "progressive_lexical_ms": 0.065,
+        "progressive_embedding_ms": 12.8446,
+        "extra_server_ms_lexical": -0.0124,
+        "extra_server_ms_embedding": 12.7672
+      },
+      {
+        "catalogue_size": 100,
+        "verbose_tokens": 4049,
+        "progressive_tokens": 272,
+        "tokens_saved": 3777,
+        "verbose_serialise_ms": 0.1438,
+        "progressive_lexical_ms": 0.1201,
+        "progressive_embedding_ms": 13.1909,
+        "extra_server_ms_lexical": -0.0237,
+        "extra_server_ms_embedding": 13.0471
+      },
+      {
+        "catalogue_size": 250,
+        "verbose_tokens": 9831,
+        "progressive_tokens": 268,
+        "tokens_saved": 9563,
+        "verbose_serialise_ms": 0.373,
+        "progressive_lexical_ms": 0.2822,
+        "progressive_embedding_ms": 14.2028,
+        "extra_server_ms_lexical": -0.0908,
+        "extra_server_ms_embedding": 13.8298
+      },
+      {
+        "catalogue_size": 500,
+        "verbose_tokens": 22294,
+        "progressive_tokens": 539,
+        "tokens_saved": 21755,
+        "verbose_serialise_ms": 0.7991,
+        "progressive_lexical_ms": 0.5049,
+        "progressive_embedding_ms": 14.502,
+        "extra_server_ms_lexical": -0.2942,
+        "extra_server_ms_embedding": 13.7029
+      },
+      {
+        "catalogue_size": 1000,
+        "verbose_tokens": 42968,
+        "progressive_tokens": 329,
+        "tokens_saved": 42639,
+        "verbose_serialise_ms": 1.4474,
+        "progressive_lexical_ms": 0.9911,
+        "progressive_embedding_ms": 12.8311,
+        "extra_server_ms_lexical": -0.4562,
+        "extra_server_ms_embedding": 11.3837
+      }
+    ],
+    "prefill_j_per_token": null,
+    "crossover_note": "run run.py first to obtain joules per input token; only time is reported here"
+  }
+}

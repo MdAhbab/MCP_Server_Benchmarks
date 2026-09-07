@@ -1,0 +1,650 @@
+{
+  "n_tools": 2797,
+  "n_groups": 19,
+  "ladder": [
+    "R",
+    "C fixed",
+    "C gap",
+    "C relative",
+    "+Pareto",
+    "+Budget",
+    "+Learned"
+  ],
+  "learned_stage_protocol": "leave-one-seed-out",
+  "encoders": {
+    "tfidf": {
+      "encoder": "+Learned",
+      "per_seed": [
+        {
+          "seed": 42,
+          "k_max": 94,
+          "stages": {
+            "R": {
+              "recall": 1.0,
+              "tokens": 4014.8033333333333,
+              "tokens_constraint": 3988.71,
+              "routing_top1": 0.25
+            },
+            "C fixed": {
+              "recall": 1.0,
+              "tokens": 4014.8033333333333,
+              "tokens_constraint": 3988.71,
+              "routing_top1": 0.51
+            },
+            "C gap": {
+              "recall": 1.0,
+              "tokens": 4014.8033333333333,
+              "tokens_constraint": 3988.71,
+              "routing_top1": 0.5
+            },
+            "C relative": {
+              "recall": 1.0,
+              "tokens": 4014.8033333333333,
+              "tokens_constraint": 3988.71,
+              "routing_top1": 0.54
+            },
+            "+Pareto": {
+              "recall": 1.0,
+              "tokens": 4014.8033333333333,
+              "tokens_constraint": 3753.125,
+              "routing_top1": 0.475
+            },
+            "+Budget": {
+              "recall": 0.9933333333333333,
+              "tokens": 3224.673333333333,
+              "tokens_constraint": 3242.195,
+              "routing_top1": 0.49
+            },
+            "+Learned": {
+              "recall": 0.9933333333333333,
+              "tokens": 3224.673333333333,
+              "tokens_constraint": 3242.195,
+              "routing_top1": 0.5
+            }
+          },
+          "fixed_margin_top1": 0.52
+        },
+        {
+          "seed": 43,
+          "k_max": 94,
+          "stages": {
+            "R": {
+              "recall": 1.0,
+              "tokens": 3960.82,
+              "tokens_constraint": 3976.59,
+              "routing_top1": 0.36
+            },
+            "C fixed": {
+              "recall": 1.0,
+              "tokens": 3960.82,
+              "tokens_constraint": 3976.59,
+              "routing_top1": 0.485
+            },
+            "C gap": {
+              "recall": 1.0,
+              "tokens": 3960.82,
+              "tokens_constraint": 3976.59,
+              "routing_top1": 0.54
+            },
+            "C relative": {
+              "recall": 1.0,
+              "tokens": 3960.82,
+              "tokens_constraint": 3976.59,
+              "routing_top1": 0.525
+            },
+            "+Pareto": {
+              "recall": 1.0,
+              "tokens": 3960.82,
+              "tokens_constraint": 3719.67,
+              "routing_top1": 0.555
+            },
+            "+Budget": {
+              "recall": 0.9966666666666667,
+              "tokens": 3340.95,
+              "tokens_constraint": 3177.42,
+              "routing_top1": 0.555
+            },
+            "+Learned": {
+              "recall": 0.9966666666666667,
+              "tokens": 3340.95,
+              "tokens_constraint": 3177.42,
+              "routing_top1": 0.525
+            }
+          },
+          "fixed_margin_top1": 0.54
+        },
+        {
+          "seed": 44,
+          "k_max": 94,
+          "stages": {
+            "R": {
+              "recall": 0.9933333333333333,
+              "tokens": 4255.8,
+              "tokens_constraint": 3975.62,
+              "routing_top1": 0.285
+            },
+            "C fixed": {
+              "recall": 0.9933333333333333,
+              "tokens": 4255.8,
+              "tokens_constraint": 3975.62,
+              "routing_top1": 0.38
+            },
+            "C gap": {
+              "recall": 0.9933333333333333,
+              "tokens": 4255.8,
+              "tokens_constraint": 3975.62,
+              "routing_top1": 0.38
+            },
+            "C relative": {
+              "recall": 0.9933333333333333,
+              "tokens": 4255.8,
+              "tokens_constraint": 3975.62,
+              "routing_top1": 0.425
+            },
+            "+Pareto": {
+              "recall": 0.9933333333333333,
+              "tokens": 4255.8,
+              "tokens_constraint": 3743.145,
+              "routing_top1": 0.365
+            },
+            "+Budget": {
+              "recall": 0.9933333333333333,
+              "tokens": 3538.7766666666666,
+              "tokens_constraint": 3208.56,
+              "routing_top1": 0.365
+            },
+            "+Learned": {
+              "recall": 0.9933333333333333,
+              "tokens": 3538.7766666666666,
+              "tokens_constraint": 3208.56,
+              "routing_top1": 0.3
+            }
+          },
+          "fixed_margin_top1": 0.315
+        },
+        {
+          "seed": 45,
+          "k_max": 94,
+          "stages": {
+            "R": {
+              "recall": 0.9833333333333333,
+              "tokens": 3945.6766666666667,
+              "tokens_constraint": 4047.865,
+              "routing_top1": 0.175
+            },
+            "C fixed": {
+              "recall": 0.9833333333333333,
+              "tokens": 3945.6766666666667,
+              "tokens_constraint": 4047.865,
+              "routing_top1": 0.36
+            },
+            "C gap": {
+              "recall": 0.9833333333333333,
+              "tokens": 3945.6766666666667,
+              "tokens_constraint": 4047.865,
+              "routing_top1": 0.36
+            },
+            "C relative": {
+              "recall": 0.9833333333333333,
+              "tokens": 3945.6766666666667,
+              "tokens_constraint": 4047.865,
+              "routing_top1": 0.4
+            },
+            "+Pareto": {
+              "recall": 0.9833333333333333,
+              "tokens": 3945.6766666666667,
+              "tokens_constraint": 3761.98,
+              "routing_top1": 0.445
+            },
+            "+Budget": {
+              "recall": 0.9833333333333333,
+              "tokens": 3292.423333333333,
+              "tokens_constraint": 3248.02,
+              "routing_top1": 0.43
+            },
+            "+Learned": {
+              "recall": 0.9833333333333333,
+              "tokens": 3292.423333333333,
+              "tokens_constraint": 3248.02,
+              "routing_top1": 0.41
+            }
+          },
+          "fixed_margin_top1": 0.375
+        },
+        {
+          "seed": 46,
+          "k_max": 94,
+          "stages": {
+            "R": {
+              "recall": 0.9933333333333333,
+              "tokens": 3884.01,
+              "tokens_constraint": 3937.885,
+              "routing_top1": 0.275
+            },
+            "C fixed": {
+              "recall": 0.9933333333333333,
+              "tokens": 3884.01,
+              "tokens_constraint": 3937.885,
+              "routing_top1": 0.535
+            },
+            "C gap": {
+              "recall": 0.9933333333333333,
+              "tokens": 3884.01,
+              "tokens_constraint": 3937.885,
+              "routing_top1": 0.475
+            },
+            "C relative": {
+              "recall": 0.9933333333333333,
+              "tokens": 3884.01,
+              "tokens_constraint": 3937.885,
+              "routing_top1": 0.555
+            },
+            "+Pareto": {
+              "recall": 0.9933333333333333,
+              "tokens": 3884.01,
+              "tokens_constraint": 3688.485,
+              "routing_top1": 0.52
+            },
+            "+Budget": {
+              "recall": 0.9933333333333333,
+              "tokens": 3139.73,
+              "tokens_constraint": 3113.145,
+              "routing_top1": 0.535
+            },
+            "+Learned": {
+              "recall": 0.9933333333333333,
+              "tokens": 3139.73,
+              "tokens_constraint": 3113.145,
+              "routing_top1": 0.515
+            }
+          },
+          "fixed_margin_top1": 0.52
+        }
+      ],
+      "aggregate": {
+        "R": {
+          "recall_mean": 0.994,
+          "recall_std": 0.006831300510639755,
+          "tokens_mean": 4012.222,
+          "tokens_constraint_mean": 3985.334,
+          "routing_top1_mean": 0.269,
+          "routing_top1_std": 0.06665208173793223,
+          "n_seeds": 5
+        },
+        "C fixed": {
+          "recall_mean": 0.994,
+          "recall_std": 0.006831300510639755,
+          "tokens_mean": 4012.222,
+          "tokens_constraint_mean": 3985.334,
+          "routing_top1_mean": 0.454,
+          "routing_top1_std": 0.07900949310051295,
+          "n_seeds": 5
+        },
+        "C gap": {
+          "recall_mean": 0.994,
+          "recall_std": 0.006831300510639755,
+          "tokens_mean": 4012.222,
+          "tokens_constraint_mean": 3985.334,
+          "routing_top1_mean": 0.451,
+          "routing_top1_std": 0.07781388050984221,
+          "n_seeds": 5
+        },
+        "C relative": {
+          "recall_mean": 0.994,
+          "recall_std": 0.006831300510639755,
+          "tokens_mean": 4012.222,
+          "tokens_constraint_mean": 3985.334,
+          "routing_top1_mean": 0.48900000000000005,
+          "routing_top1_std": 0.07118637510085762,
+          "n_seeds": 5
+        },
+        "+Pareto": {
+          "recall_mean": 0.994,
+          "recall_std": 0.006831300510639755,
+          "tokens_mean": 4012.222,
+          "tokens_constraint_mean": 3733.281,
+          "routing_top1_mean": 0.47200000000000003,
+          "routing_top1_std": 0.07310950690573698,
+          "n_seeds": 5
+        },
+        "+Budget": {
+          "recall_mean": 0.992,
+          "recall_std": 0.005055250296034389,
+          "tokens_mean": 3307.3106666666667,
+          "tokens_constraint_mean": 3197.868,
+          "routing_top1_mean": 0.47500000000000003,
+          "routing_top1_std": 0.0780224326716362,
+          "n_seeds": 5
+        },
+        "+Learned": {
+          "recall_mean": 0.992,
+          "recall_std": 0.005055250296034389,
+          "tokens_mean": 3307.3106666666667,
+          "tokens_constraint_mean": 3197.868,
+          "routing_top1_mean": 0.45,
+          "routing_top1_std": 0.09545941546018392,
+          "n_seeds": 5
+        }
+      },
+      "fixed_margin_top1_mean": 0.454,
+      "fixed_margin_top1_std": 0.10206615501722402
+    },
+    "neural": {
+      "encoder": "+Learned",
+      "per_seed": [
+        {
+          "seed": 42,
+          "k_max": 94,
+          "stages": {
+            "R": {
+              "recall": 1.0,
+              "tokens": 3917.9566666666665,
+              "tokens_constraint": 4171.72,
+              "routing_top1": 0.19
+            },
+            "C fixed": {
+              "recall": 1.0,
+              "tokens": 3917.9566666666665,
+              "tokens_constraint": 4171.72,
+              "routing_top1": 0.425
+            },
+            "C gap": {
+              "recall": 1.0,
+              "tokens": 3917.9566666666665,
+              "tokens_constraint": 4171.72,
+              "routing_top1": 0.34
+            },
+            "C relative": {
+              "recall": 1.0,
+              "tokens": 3917.9566666666665,
+              "tokens_constraint": 4171.72,
+              "routing_top1": 0.35
+            },
+            "+Pareto": {
+              "recall": 1.0,
+              "tokens": 3917.9566666666665,
+              "tokens_constraint": 4108.575,
+              "routing_top1": 0.46
+            },
+            "+Budget": {
+              "recall": 1.0,
+              "tokens": 2797.983333333333,
+              "tokens_constraint": 3435.26,
+              "routing_top1": 0.46
+            },
+            "+Learned": {
+              "recall": 1.0,
+              "tokens": 2797.983333333333,
+              "tokens_constraint": 3435.26,
+              "routing_top1": 0.485
+            }
+          },
+          "fixed_margin_top1": 0.215
+        },
+        {
+          "seed": 43,
+          "k_max": 94,
+          "stages": {
+            "R": {
+              "recall": 0.9966666666666667,
+              "tokens": 3893.59,
+              "tokens_constraint": 4137.325,
+              "routing_top1": 0.31
+            },
+            "C fixed": {
+              "recall": 0.9966666666666667,
+              "tokens": 3893.59,
+              "tokens_constraint": 4137.325,
+              "routing_top1": 0.615
+            },
+            "C gap": {
+              "recall": 0.9966666666666667,
+              "tokens": 3893.59,
+              "tokens_constraint": 4137.325,
+              "routing_top1": 0.475
+            },
+            "C relative": {
+              "recall": 0.9966666666666667,
+              "tokens": 3893.59,
+              "tokens_constraint": 4137.325,
+              "routing_top1": 0.51
+            },
+            "+Pareto": {
+              "recall": 0.9966666666666667,
+              "tokens": 3893.59,
+              "tokens_constraint": 4079.565,
+              "routing_top1": 0.515
+            },
+            "+Budget": {
+              "recall": 0.9966666666666667,
+              "tokens": 2802.0533333333333,
+              "tokens_constraint": 3411.015,
+              "routing_top1": 0.515
+            },
+            "+Learned": {
+              "recall": 0.9966666666666667,
+              "tokens": 2802.0533333333333,
+              "tokens_constraint": 3411.015,
+              "routing_top1": 0.525
+            }
+          },
+          "fixed_margin_top1": 0.265
+        },
+        {
+          "seed": 44,
+          "k_max": 94,
+          "stages": {
+            "R": {
+              "recall": 0.9966666666666667,
+              "tokens": 4041.3033333333333,
+              "tokens_constraint": 4107.53,
+              "routing_top1": 0.275
+            },
+            "C fixed": {
+              "recall": 0.9966666666666667,
+              "tokens": 4041.3033333333333,
+              "tokens_constraint": 4107.53,
+              "routing_top1": 0.45
+            },
+            "C gap": {
+              "recall": 0.9966666666666667,
+              "tokens": 4041.3033333333333,
+              "tokens_constraint": 4107.53,
+              "routing_top1": 0.44
+            },
+            "C relative": {
+              "recall": 0.9966666666666667,
+              "tokens": 4041.3033333333333,
+              "tokens_constraint": 4107.53,
+              "routing_top1": 0.45
+            },
+            "+Pareto": {
+              "recall": 0.9966666666666667,
+              "tokens": 4041.3033333333333,
+              "tokens_constraint": 4050.08,
+              "routing_top1": 0.495
+            },
+            "+Budget": {
+              "recall": 0.9933333333333333,
+              "tokens": 3049.9766666666665,
+              "tokens_constraint": 3296.255,
+              "routing_top1": 0.485
+            },
+            "+Learned": {
+              "recall": 0.9933333333333333,
+              "tokens": 3049.9766666666665,
+              "tokens_constraint": 3296.255,
+              "routing_top1": 0.51
+            }
+          },
+          "fixed_margin_top1": 0.18
+        },
+        {
+          "seed": 45,
+          "k_max": 94,
+          "stages": {
+            "R": {
+              "recall": 1.0,
+              "tokens": 3848.4733333333334,
+              "tokens_constraint": 4251.84,
+              "routing_top1": 0.195
+            },
+            "C fixed": {
+              "recall": 1.0,
+              "tokens": 3848.4733333333334,
+              "tokens_constraint": 4251.84,
+              "routing_top1": 0.445
+            },
+            "C gap": {
+              "recall": 1.0,
+              "tokens": 3848.4733333333334,
+              "tokens_constraint": 4251.84,
+              "routing_top1": 0.335
+            },
+            "C relative": {
+              "recall": 1.0,
+              "tokens": 3848.4733333333334,
+              "tokens_constraint": 4251.84,
+              "routing_top1": 0.33
+            },
+            "+Pareto": {
+              "recall": 1.0,
+              "tokens": 3848.4733333333334,
+              "tokens_constraint": 4196.525,
+              "routing_top1": 0.42
+            },
+            "+Budget": {
+              "recall": 1.0,
+              "tokens": 2847.37,
+              "tokens_constraint": 3466.185,
+              "routing_top1": 0.425
+            },
+            "+Learned": {
+              "recall": 1.0,
+              "tokens": 2847.37,
+              "tokens_constraint": 3466.185,
+              "routing_top1": 0.465
+            }
+          },
+          "fixed_margin_top1": 0.24
+        },
+        {
+          "seed": 46,
+          "k_max": 94,
+          "stages": {
+            "R": {
+              "recall": 1.0,
+              "tokens": 3787.8966666666665,
+              "tokens_constraint": 4107.25,
+              "routing_top1": 0.185
+            },
+            "C fixed": {
+              "recall": 1.0,
+              "tokens": 3787.8966666666665,
+              "tokens_constraint": 4107.25,
+              "routing_top1": 0.475
+            },
+            "C gap": {
+              "recall": 1.0,
+              "tokens": 3787.8966666666665,
+              "tokens_constraint": 4107.25,
+              "routing_top1": 0.365
+            },
+            "C relative": {
+              "recall": 1.0,
+              "tokens": 3787.8966666666665,
+              "tokens_constraint": 4107.25,
+              "routing_top1": 0.41
+            },
+            "+Pareto": {
+              "recall": 1.0,
+              "tokens": 3787.8966666666665,
+              "tokens_constraint": 4040.06,
+              "routing_top1": 0.49
+            },
+            "+Budget": {
+              "recall": 1.0,
+              "tokens": 2660.5733333333333,
+              "tokens_constraint": 3338.72,
+              "routing_top1": 0.49
+            },
+            "+Learned": {
+              "recall": 1.0,
+              "tokens": 2660.5733333333333,
+              "tokens_constraint": 3338.72,
+              "routing_top1": 0.525
+            }
+          },
+          "fixed_margin_top1": 0.195
+        }
+      ],
+      "aggregate": {
+        "R": {
+          "recall_mean": 0.9986666666666667,
+          "recall_std": 0.001825741858350535,
+          "tokens_mean": 3897.844,
+          "tokens_constraint_mean": 4155.133,
+          "routing_top1_mean": 0.231,
+          "routing_top1_std": 0.05759774301133683,
+          "n_seeds": 5
+        },
+        "C fixed": {
+          "recall_mean": 0.9986666666666667,
+          "recall_std": 0.001825741858350535,
+          "tokens_mean": 3897.844,
+          "tokens_constraint_mean": 4155.133,
+          "routing_top1_mean": 0.482,
+          "routing_top1_std": 0.0764525996941896,
+          "n_seeds": 5
+        },
+        "C gap": {
+          "recall_mean": 0.9986666666666667,
+          "recall_std": 0.001825741858350535,
+          "tokens_mean": 3897.844,
+          "tokens_constraint_mean": 4155.133,
+          "routing_top1_mean": 0.391,
+          "routing_top1_std": 0.06298809411309408,
+          "n_seeds": 5
+        },
+        "C relative": {
+          "recall_mean": 0.9986666666666667,
+          "recall_std": 0.001825741858350535,
+          "tokens_mean": 3897.844,
+          "tokens_constraint_mean": 4155.133,
+          "routing_top1_mean": 0.41,
+          "routing_top1_std": 0.07348469228349534,
+          "n_seeds": 5
+        },
+        "+Pareto": {
+          "recall_mean": 0.9986666666666667,
+          "recall_std": 0.001825741858350535,
+          "tokens_mean": 3897.844,
+          "tokens_constraint_mean": 4094.961,
+          "routing_top1_mean": 0.476,
+          "routing_top1_std": 0.0369797241742012,
+          "n_seeds": 5
+        },
+        "+Budget": {
+          "recall_mean": 0.998,
+          "recall_std": 0.0029814239699997324,
+          "tokens_mean": 2831.5913333333333,
+          "tokens_constraint_mean": 3389.487,
+          "routing_top1_mean": 0.475,
+          "routing_top1_std": 0.03409545424246464,
+          "n_seeds": 5
+        },
+        "+Learned": {
+          "recall_mean": 0.998,
+          "recall_std": 0.0029814239699997324,
+          "tokens_mean": 2831.5913333333333,
+          "tokens_constraint_mean": 3389.487,
+          "routing_top1_mean": 0.502,
+          "routing_top1_std": 0.026362852652928138,
+          "n_seeds": 5
+        }
+      },
+      "fixed_margin_top1_mean": 0.219,
+      "fixed_margin_top1_std": 0.03416869912653978
+    }
+  }
+}

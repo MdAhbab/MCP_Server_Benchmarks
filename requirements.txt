@@ -1,10 +1,28 @@
-# Dependencies for the MCP Green Computing benchmark suite.
-# Install with: pip install -r requirements.txt
+# Dependencies for the MCP sustainability benchmark suite.
+#   pip install -r requirements.txt
 # On Windows, set PYTHONUTF8=1 before running to avoid console encoding errors.
+#
+# GPU users: install torch FIRST from the CUDA index matching your card.
+# An RTX 50-series (Blackwell, sm_120) needs cu128:
+#   pip install torch --index-url https://download.pytorch.org/whl/cu128
+# See guide.md section 2.
 
-psutil>=5.9        # CPU/memory sampling for the energy benchmark
-tiktoken>=0.5      # exact cl100k_base token counting
-msgpack>=1.0       # binary serialisation comparison (what-if analysis)
-matplotlib>=3.6    # figure generation
-numpy>=1.24        # numerical support
-scikit-learn>=1.3  # HDBSCAN, TF-IDF, truncated SVD for the GHD benchmark
+# --- core suite ---
+psutil>=5.9            # CPU/memory sampling for the utilisation-model benchmark
+tiktoken>=0.5          # exact cl100k_base and o200k_base token counting
+msgpack>=1.0           # binary serialisation comparison
+matplotlib>=3.6        # figure generation
+numpy>=1.24
+scikit-learn>=1.3      # HDBSCAN, TF-IDF, SVD, and the EATS learned reranker
+
+# --- discovery experiments ---
+sentence-transformers>=3.0   # neural encoder shared by every discovery policy
+
+# --- hardware energy and the GPU runner ---
+nvidia-ml-py>=12.0     # NVML energy counter. Note: NOT the old `pynvml` package
+transformers>=4.44     # the local model used by run.py
+accelerate>=0.30       # device placement for that model
+bitsandbytes>=0.43     # only needed for `--model qwen7b` (4-bit)
+
+# --- operational-metadata attestation ---
+cryptography>=42.0     # Ed25519 signing and verification

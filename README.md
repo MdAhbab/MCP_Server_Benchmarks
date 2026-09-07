@@ -2,7 +2,7 @@
 
 ## Overview
 
-This guide provides detailed instructions for conducting benchmarking experiments on MCP (Model Context Protocol) servers to generate empirical data for your survey paper on energy-efficient MCP architectures.
+This guide provides detailed instructions for conducting benchmarking experiments on MCP (Model Context Protocol) servers to generate empirical data for the study of energy-efficient MCP architectures.
 
 ---
 
@@ -104,7 +104,7 @@ Configure MCP servers in: `%APPDATA%\Claude\claude_desktop_config.json`
 
 ## 2. Benchmark Scenarios
 
-Based on your survey, here are the key scenarios to benchmark:
+Key scenarios to benchmark:
 
 ### Scenario 1: Token Consumption Comparison
 **Goal:** Measure token usage in traditional ReAct vs Progressive Disclosure patterns

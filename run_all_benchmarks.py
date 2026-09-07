@@ -19,7 +19,7 @@ def run_benchmark(script_name: str) -> bool:
         result = subprocess.run(
             [sys.executable, script_name],
             capture_output=False,
-            timeout=300  # 5 minute timeout per benchmark
+            timeout=3600  # discovery benchmarks encode thousands of texts
         )
         return result.returncode == 0
     except subprocess.TimeoutExpired:
@@ -36,7 +36,7 @@ def main():
 ║          MCP GREEN COMPUTING BENCHMARK SUITE                      ║
 ║                                                                   ║
 ║  This suite runs all benchmarks to generate empirical data        ║
-║  for your survey paper on energy-efficient MCP servers.           ║
+║  for the empirical study of energy-efficient MCP architectures.   ║
 ╚══════════════════════════════════════════════════════════════════╝
 """)
     
@@ -54,6 +54,10 @@ def main():
         ("Scalability", "scalability_benchmark.py"),
         ("Energy Consumption", "energy_benchmark.py"),
         ("Hierarchical Discovery (GHD)", "hierarchical_discovery_benchmark.py"),
+        ("Real catalogue discovery", "real_catalogue_benchmark.py"),
+        ("Dense encoder discovery", "dense_catalogue_benchmark.py"),
+        ("EATS selection ablation", "eats_benchmark.py"),
+        ("CPU experiments (network, tokenizer, disclosure)", "cpu_experiments.py"),
     ]
     
     results = {}
