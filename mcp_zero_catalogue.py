@@ -66,11 +66,18 @@ def stream_servers(path):
 
 def build(src, out_dir="data"):
     os.makedirs(out_dir, exist_ok=True)
-    catalogue, embeddings = [], []
+    catalogue, embeddings, servers = [], [], []
     n_servers = 0
     for srv in stream_servers(src):
         n_servers += 1
         server = srv.get("name") or "unknown"
+        # Server-level records drive the first stage of MCP-Zero's router.
+        servers.append({
+            "name": server,
+            "description": (srv.get("description") or "").strip(),
+            "summary": (srv.get("summary") or "").strip(),
+            "n_tools": len(srv.get("tools") or []),
+        })
         for t in srv.get("tools") or []:
             desc = (t.get("description") or "").strip()
             name = (t.get("name") or "").strip()
@@ -97,14 +104,18 @@ def build(src, out_dir="data"):
 
     cpath = os.path.join(out_dir, "mcp_tools_catalogue.json")
     epath = os.path.join(out_dir, "mcp_tools_embeddings.npy")
+    spath = os.path.join(out_dir, "mcp_servers.json")
     with open(cpath, "w", encoding="utf-8") as f:
         json.dump(catalogue, f, ensure_ascii=False)
+    with open(spath, "w", encoding="utf-8") as f:
+        json.dump(servers, f, ensure_ascii=False)
     np.save(epath, mat)
 
     print(f"servers parsed      : {n_servers}")
     print(f"tools extracted     : {len(catalogue)}")
     print(f"tools with embedding: {have} (dim {dim})")
     print(f"wrote {cpath}")
+    print(f"wrote {spath}")
     print(f"wrote {epath}")
 
 

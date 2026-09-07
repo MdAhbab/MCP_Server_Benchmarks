@@ -299,12 +299,23 @@ class EmbeddingPipeline:
 # ---------------------------------------------------------------------------
 
 class GHDHierarchy:
-    def __init__(self, entities, features, text_vecs):
+    def __init__(self, entities, features, text_vecs, clusterer=None):
+        """clusterer: optional fitted-on-call estimator exposing fit_predict.
+
+        Defaults to HDBSCAN, which is GHD as proposed. The parameter exists
+        because density-based clustering assumes density variation, and
+        normalised neural sentence embeddings do not provide it: on the
+        2,797-tool catalogue HDBSCAN returns two or three clusters for the whole
+        corpus, which collapses the hierarchy into flat retrieval. Passing a
+        partitioning clusterer lets the hierarchy be evaluated in that setting
+        rather than silently degenerating.
+        """
         self.entities = entities
         self.features = features
         self.text_vecs = text_vecs
         t0 = time.perf_counter()
-        clusterer = HDBSCAN(min_cluster_size=MIN_CLUSTER_SIZE, min_samples=MIN_SAMPLES)
+        if clusterer is None:
+            clusterer = HDBSCAN(min_cluster_size=MIN_CLUSTER_SIZE, min_samples=MIN_SAMPLES)
         labels = clusterer.fit_predict(features)
         self.build_time_s = time.perf_counter() - t0
         self.noise_grafted = int(np.sum(labels == -1))
