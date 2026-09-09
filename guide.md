@@ -3,7 +3,11 @@
 Thanks for lending the GPU. Everything is one command; this page covers the setup
 and the one thing that reliably goes wrong on a 50-series card.
 
-Target machine: Linux, NVIDIA RTX 5070 Ti (16 GB), 32 GB RAM.
+Target machine: NVIDIA RTX 5070 Ti (16 GB), 32 GB RAM. Linux or Windows both
+work. The only difference is CPU energy: Intel RAPL is a Linux interface, so on
+Windows the run reports GPU joules and leaves the CPU figures null. GPU energy is
+the dominant term for local inference, so a Windows run is still usable. If you
+are on Linux, nothing extra is needed; RAPL is picked up automatically.
 
 ---
 
@@ -29,10 +33,13 @@ It will import fine and then fail at the first CUDA call with something like
 Install from the CUDA 12.8 index explicitly:
 
 ```bash
-python -m venv .venv && source .venv/bin/activate
+python -m venv .venv && source .venv/bin/activate   # Windows: .venv\Scripts\activate
 pip install --upgrade pip
 pip install torch --index-url https://download.pytorch.org/whl/cu128
 ```
+
+Known-good combination, the one these results came from: torch 2.11.0+cu128,
+CUDA 12.8, driver 616.64, capability 12.0.
 
 Check before going further:
 
